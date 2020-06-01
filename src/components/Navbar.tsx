@@ -9,7 +9,7 @@ export default function viewNavBar() {
                 <Navbar.Group align={Alignment.LEFT} style={styleNavBar}>
                     <Navbar.Heading>MovieLine</Navbar.Heading>
                 <Navbar.Divider />
-                    <Button className="bp3-minimal" icon="shopping-cart" text="Cart" style={styleIcon}/>
+                    <Button className="bp3-minimal" icon="shopping-cart" style={styleIcon}/>
                 </Navbar.Group>
             </Link>
         </div>
@@ -21,17 +21,17 @@ const styleNavBar:CSSProperties ={
     height: "63PX",
     width: "100%",
     fontWeight: "bold",
+    display:"flix"
 }
 
 const styleIcon:CSSProperties ={
+    display: "inline-block",
     alignItems:"right",
     fontWeight: "bold",
-    fontSize: "30px",
+    fontSize: "40px",
     position: "relative",
     color: "#FFFFFF",
-    display: "inline-block",
-    marginTop: "6px",
-    marginLeft:"15px",
-    textDecoration: "none"
+    margin: "6px",
+    marginLeft:"auto",
 
 }
