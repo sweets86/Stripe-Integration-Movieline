@@ -7,7 +7,6 @@ export default class DetailView extends React.Component {
         return (
             <div>
                 <h2>
-                    {this.}
                     The title
                 </h2>
                 <p>
