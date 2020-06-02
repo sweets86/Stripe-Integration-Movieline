@@ -25,8 +25,8 @@ const styleNavBar:CSSProperties ={
 }
 
 const styleIcon:CSSProperties ={
-    display: "inline-block",
-    alignItems:"right",
+    display: "flex",
+    alignItems:"center",
     fontSize: "32px",
     position: "relative",
     color: "#FFFFFF",
