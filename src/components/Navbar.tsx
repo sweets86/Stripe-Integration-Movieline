@@ -5,13 +5,21 @@ import {Alignment, Button, Navbar} from "@blueprintjs/core";
 export default function viewNavBar() {
     return (
         <div>
-            <Link to='/'>
-                <Navbar.Group align={Alignment.LEFT} style={styleNavBar}>
-                    <Navbar.Heading  style={styleHeading}>MovieLine</Navbar.Heading>
-                <Navbar.Divider />
-                    <Button className="bp3-button bp3-minimal bp3-icon-shopping-cart" style={styleIcon}/>
+            <Navbar style={styleNavBar}>
+
+                <Navbar.Group align={Alignment.LEFT} >
+                    <Link to='/'>
+                        <Navbar.Heading  style={styleHeading}>MovieLine</Navbar.Heading>
+                    </Link>
                 </Navbar.Group>
-            </Link>
+        
+                <Navbar.Group align={Alignment.RIGHT}>
+                    <Link to='/CartView'>
+                        <Button className="bp3-button bp3-minimal bp3-icon-shopping-cart" style={styleIcon}/>
+                    </Link>
+                </Navbar.Group>
+
+            </Navbar>
         </div>
     )
 };
@@ -20,8 +28,8 @@ const styleNavBar:CSSProperties ={
     backgroundColor: "#212121",
     height: "63PX",
     width: "100%",
-    fontWeight: "bold",
-    display:"flix"
+    display:"flix",
+    position: "absolute",
 }
 
 const styleIcon:CSSProperties ={
@@ -31,7 +39,6 @@ const styleIcon:CSSProperties ={
     position: "relative",
     color: "#FFFFFF",
     margin: "8px",
-    marginLeft:"auto",
 }
 
 const styleHeading:CSSProperties ={
