@@ -1,30 +1,28 @@
 import React from 'react'
+import {products} from '../products'
+import {Product} from '../products'
 import ProductItem from './ProductItem'
 
-interface Props {
-    view: string
-}
 
 // Startsida- Startpage
-export default function MasterView(props: Props) {
+export default class MasterView extends React.Component {
 
-    const products = ['jobs', 'pirates', 'silicon', 'socialNet']
-    
-        return(
-            <div style={container}>
-                {products.map((title) => {
-                    return <ProductItem view={title} key={title}  />
-                })}
-            </div>
+    get loopThis() {
+        if (productList.length) {
+            return productList.map((product) => {
+                return (
+                    <ProductItem />
+                )
+            })
+        }else {
+            "this"
+        }
+    }
+
+    render() {
+        return (
+            this.loopThis
         )
+    }
 
 };
-
-const container: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    margin: '2em',
-    justifyContent: 'stretch',
-    alignItems: 'stretch'
-}
