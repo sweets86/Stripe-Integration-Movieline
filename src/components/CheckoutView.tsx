@@ -7,8 +7,7 @@ export default class CheckoutView extends React.Component {
     render() {
         return (
             <div>
-                <CartView />
-                <DetailCheckoutView />
+                Checkout
             </div>
         )
     }

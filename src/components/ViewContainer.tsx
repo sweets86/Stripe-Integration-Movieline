@@ -10,7 +10,7 @@ export default function ViewContainer() {
         <Switch>
             <Route exact path='/' component={MasterView} />
             <Route path='/products/:product' component={DetailView} />
-            <Route path= '/products/:cart' component={CartView} />
+            <Route path='/products/:cart' component={CartView} />
             <Route path='/products/:checkout' component={CheckoutView} />
         </Switch>
     )
