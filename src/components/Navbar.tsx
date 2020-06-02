@@ -28,13 +28,14 @@ const styleNavBar:CSSProperties ={
     backgroundColor: "#212121",
     height: "63PX",
     width: "100%",
-    display:"flix",
-    position: "absolute",
+    position: "sticky",
+    alignItems: 'center'
 }
 
 const styleIcon:CSSProperties ={
     display: "flex",
     alignItems:"center",
+    justifyItems: 'right',
     fontSize: "32px",
     position: "relative",
     color: "#FFFFFF",
