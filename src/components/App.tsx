@@ -6,10 +6,8 @@ import { BrowserRouter } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-
-        <h1>Hello Grupp 7</h1>
+    <div>
+      <header>
         <BrowserRouter>
           <Layout />
         </BrowserRouter>
