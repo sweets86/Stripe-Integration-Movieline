@@ -5,7 +5,7 @@ export default class CartView extends React.Component {
     render() {
         return (
             <div>
-
+                this from cart view
             </div>
         )
     }
