@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import { products } from "../products"
 import { Product } from "../products"
 import { Button } from '@blueprintjs/core'
+import { Link } from 'react-router-dom'
+
 
 interface Props {
 
@@ -18,23 +20,29 @@ console.log(productList)
 // Startsida- Startpage
 export default class MasterView extends React.Component {
 
-    constructor(Props: Props) {
-        super(Props)
+    constructor(props: Props) {
+        super(props)
+
     }
-
-
-
+    
     get loopThis() {
         if (productList.length) {
             return productList.map((product) => {
                 return (
+
+
                     <div key={product.id}>
-                        <h1>{product.title}</h1>
+                        <Link to={"/products/" + product.id}>
+                            <h1>{product.title}</h1>
+                        </Link>
+
                         <p>{product.descreption}</p>
-                        <img src={require("./../assets/" + product.img)} alt="pic" />
-                        <h3>{product.price}</h3>
+                        <img src={require("./../assets/" + product.img)} alt="pic" style={ poster } className='movieImg'/>
+                        <h3>Köp: { product.price } SEK</h3>
                         <Button>Add to cart</Button>
+                        
                     </div >
+                    
                 )
             })
         } else {
@@ -43,23 +51,36 @@ export default class MasterView extends React.Component {
     };
 
     render() {
-        return <div>
+        return <div style={productsContainer}>
             {this.loopThis}
         </div>
     }
 
+
 }
-/*
 
-export default function MasterView() {
 
-    const sectionIds = ['forest', 'sky', 'desert']
-    return (
-        <div style={container}>
-            {sectionIds.map((value) =>
-                <NavigationItem key={value} view={value} />
-            )}
+const productsContainer: CSSProperties = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '100%',
+    textAlign: 'center',
+    backgroundColor: '#f0f0f0'
+}
 
-        </div>
-    )
-} */
+const productCards: CSSProperties = {
+    width: '100%',
+    margin: '2%',
+    padding: '20px',
+    backgroundColor: 'white'
+    
+}
+
+const poster: CSSProperties = {
+  objectFit: 'cover',
+  width: '70%'    
+}
+
+
+
+
