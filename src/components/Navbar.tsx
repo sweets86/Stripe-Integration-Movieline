@@ -5,7 +5,7 @@ import {Alignment, Button, Navbar} from "@blueprintjs/core";
 export default function viewNavBar() {
     return (
         <div>
-            <Navbar style={styleNavBar}>
+            {<Navbar style={styleNavBar}>
 
                 <Navbar.Group align={Alignment.LEFT} >
                     <Link to='/'>
@@ -14,12 +14,15 @@ export default function viewNavBar() {
                 </Navbar.Group>
         
                 <Navbar.Group align={Alignment.RIGHT}>
-                    <Link to='/CartView'>
-                        <Button className="bp3-button bp3-minimal bp3-icon-shopping-cart" style={styleIcon} />
+
+
+                    <Link to='/cart/'>
+                        <Button className="bp3-button bp3-minimal bp3-icon-shopping-cart" style={styleIcon}/>
+
                     </Link>
                 </Navbar.Group>
 
-            </Navbar>
+            </Navbar>}
         </div>
     )
 };
