@@ -31,9 +31,9 @@ export default class MasterView extends React.Component {
                 return (
 
 
-                    <div key={product.id}>
+                    <div key={product.id} style={ productCards }>
                         <Link to={"/products/" + product.id}>
-                            <h1>{product.title}</h1>
+                            <h1 style={ TitleLink }>{product.title}</h1>
                         </Link>
 
                         <p>{product.descreption}</p>
@@ -72,7 +72,7 @@ const productCards: CSSProperties = {
     width: '100%',
     margin: '2%',
     padding: '20px',
-    backgroundColor: 'white'
+    backgroundColor: '#ccc7c7'
     
 }
 
@@ -81,6 +81,10 @@ const poster: CSSProperties = {
   width: '70%'    
 }
 
+const TitleLink: CSSProperties = {
+    textDecoration: 'none',
+    color: 'black'
+}
 
 
 
