@@ -2,6 +2,7 @@ import React from 'react'
 import { products } from "../products"
 import { Product } from "../products"
 import { Button } from '@blueprintjs/core'
+import { Link } from 'react-router-dom'
 
 interface Props {
 
@@ -18,18 +19,19 @@ console.log(productList)
 // Startsida- Startpage
 export default class MasterView extends React.Component {
 
-    constructor(Props: Props) {
-        super(Props)
+    constructor(props: Props) {
+        super(props)
+
     }
-
-
-
+    
     get loopThis() {
         if (productList.length) {
             return productList.map((product) => {
                 return (
                     <div key={product.id}>
-                        <h1>{product.title}</h1>
+                        <Link to={"/products/" + product.id}>
+                            <h1>{product.title}</h1>
+                        </Link>
                         <p>{product.descreption}</p>
                         <img src={require("./../assets/" + product.img)} alt="pic" />
                         <h3>{product.price}</h3>
@@ -48,18 +50,4 @@ export default class MasterView extends React.Component {
         </div>
     }
 
-}
-/*
-
-export default function MasterView() {
-
-    const sectionIds = ['forest', 'sky', 'desert']
-    return (
-        <div style={container}>
-            {sectionIds.map((value) =>
-                <NavigationItem key={value} view={value} />
-            )}
-
-        </div>
-    )
-} */
+};

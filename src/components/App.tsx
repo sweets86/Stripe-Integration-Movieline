@@ -3,14 +3,13 @@ import '../App.css';
 import Layout from './Layout'
 import { BrowserRouter } from 'react-router-dom'
 
-
 function App() {
   return (
     <div>
       <header>
-        <BrowserRouter>
-          <Layout />
-        </BrowserRouter>
+          <BrowserRouter>
+            <Layout />
+          </BrowserRouter>
       </header>
     </div>
   );
