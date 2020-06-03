@@ -14,8 +14,11 @@ export default function viewNavBar() {
                 </Navbar.Group>
         
                 <Navbar.Group align={Alignment.RIGHT}>
+
+
                     <Link to='/cart/'>
                         <Button className="bp3-button bp3-minimal bp3-icon-shopping-cart" style={styleIcon}/>
+
                     </Link>
                 </Navbar.Group>
 
@@ -28,17 +31,19 @@ const styleNavBar:CSSProperties ={
     backgroundColor: "#212121",
     height: "63PX",
     width: "100%",
-    display:"flix",
-    position: "absolute",
+    position: "sticky",
 }
 
 const styleIcon:CSSProperties ={
     display: "flex",
+    width: "100px",
     alignItems:"center",
+    justifyItems: 'right',
     fontSize: "32px",
     position: "relative",
     color: "#FFFFFF",
     margin: "8px",
+    marginTop: "23px"
 }
 
 const styleHeading:CSSProperties ={
@@ -48,4 +53,5 @@ const styleHeading:CSSProperties ={
     fontSize: "30px",
     color: "#FFFFFF",
     margin: "8px",
+    marginTop: "17px"
 }

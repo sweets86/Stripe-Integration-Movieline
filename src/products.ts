@@ -29,6 +29,6 @@ export const products: Product[] = [{
     id: 4,
     title: "Jobs",
     descreption: "Jobs är en amerikansk dramafilm från 2013 i regi av Joshua Michael Stern. Filmen skildrar Steve Jobs' liv och Apples historia från 1970- talet till 2000- talets början. Steve Jobs spelas av Ashton Kutcher[1] och Steve Wozniak spelas av Josh Gad. Filmen hade premiär den 16 augusti 2013.",
-    img: "jobs_bigImg.jpg",
+    img: "jobs_bigImg.png",
     price: 599,
 }]
