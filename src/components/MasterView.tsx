@@ -3,6 +3,7 @@ import { products } from "../products"
 import { Product } from "../products"
 import { Button } from '@blueprintjs/core'
 import { Link } from 'react-router-dom'
+import { cartListContext } from '../contexts/cartListContext'
 
 
 interface Props {
@@ -24,36 +25,46 @@ export default class MasterView extends React.Component {
         super(props)
 
     }
-    
+
     get loopThis() {
-        if (productList.length) {
+        return "test"
+        /* if (productList.length) {
             return productList.map((product) => {
                 return (
-
-
                     <div key={product.id}>
                         <Link to={"/products/" + product.id}>
                             <h1>{product.title}</h1>
+                            <p>{product.descreption}</p>
+                            <img src={require("./../assets/" + product.img)} alt="pic" style={poster} className='movieImg' />
+                            <h3>Köp: {product.price} SEK</h3>
                         </Link>
-
-                        <p>{product.descreption}</p>
-                        <img src={require("./../assets/" + product.img)} alt="pic" style={ poster } className='movieImg'/>
-                        <h3>Köp: { product.price } SEK</h3>
                         <Button>Add to cart</Button>
-                        
+
                     </div >
-                    
+
                 )
             })
         } else {
             return "sdd"
-        }
+        } */
     };
 
     render() {
-        return <div style={productsContainer}>
-            {this.loopThis}
-        </div>
+        return (
+            <cartListContext.Consumer>
+                {({ theList }) => (
+                    <div>
+                        {theList}
+                    </div>
+                )}
+            </cartListContext.Consumer>
+
+
+
+            /* <div style={productsContainer}>
+                {this.loopThis}
+            </div> */
+        )
     }
 
 
@@ -73,12 +84,12 @@ const productCards: CSSProperties = {
     margin: '2%',
     padding: '20px',
     backgroundColor: 'white'
-    
+
 }
 
 const poster: CSSProperties = {
-  objectFit: 'cover',
-  width: '70%'    
+    objectFit: 'cover',
+    width: '70%'
 }
 
 
