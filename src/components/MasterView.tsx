@@ -3,7 +3,6 @@ import { products } from "../products"
 import { Product } from "../products"
 import { Button } from '@blueprintjs/core'
 import { Link } from 'react-router-dom'
-import { cartListContext } from '../contexts/cartListContext'
 
 
 interface Props {
@@ -27,8 +26,7 @@ export default class MasterView extends React.Component {
     }
 
     get loopThis() {
-        return "test"
-        /* if (productList.length) {
+        if (productList.length) {
             return productList.map((product) => {
                 return (
                     <div key={product.id}>
@@ -46,24 +44,12 @@ export default class MasterView extends React.Component {
             })
         } else {
             return "sdd"
-        } */
+        }
     };
 
     render() {
         return (
-            <cartListContext.Consumer>
-                {({ theList }) => (
-                    <div>
-                        {theList}
-                    </div>
-                )}
-            </cartListContext.Consumer>
-
-
-
-            /* <div style={productsContainer}>
-                {this.loopThis}
-            </div> */
+            this.loopThis
         )
     }
 

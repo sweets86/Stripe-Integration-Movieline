@@ -2,16 +2,19 @@ import React from 'react';
 import '../App.css';
 import Layout from './Layout'
 import { BrowserRouter } from 'react-router-dom'
+import { CartProvider } from '../contexts/cartContext'
 
 function App() {
   return (
 
     <div className="App">
-   
-        <BrowserRouter>
-            <Layout />
-        </BrowserRouter>
-     
+
+      <BrowserRouter>
+        <CartProvider>
+          <Layout />
+        </CartProvider>
+      </BrowserRouter>
+
     </div>
   );
 }

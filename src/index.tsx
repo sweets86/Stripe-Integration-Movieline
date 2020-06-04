@@ -3,13 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-import { cartListContext } from './contexts/cartListContext'
 
 ReactDOM.render(
   <React.StrictMode>
-    <cartListContext.Provider value={"Day"}>
-      <App />
-    </cartListContext.Provider>,
     <App />
   </React.StrictMode>,
   document.getElementById('root')
