@@ -49,7 +49,9 @@ export default class MasterView extends React.Component {
 
     render() {
         return (
-            this.loopThis
+            <div style={productsContainer}>
+                {this.loopThis}
+            </div>
         )
     }
 
