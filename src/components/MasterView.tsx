@@ -3,6 +3,8 @@ import { products } from "../products"
 import { Product } from "../products"
 import { Button } from '@blueprintjs/core'
 import { Link } from 'react-router-dom'
+import { CartConsumer } from '../contexts/cartContext'
+
 
 
 interface Props {
@@ -30,14 +32,21 @@ export default class MasterView extends React.Component {
             return productList.map((product) => {
                 return (
                     <div key={product.id}>
+                        <CartConsumer>
+                            {({ addProductToCart }) => (
+                                <Button onClick={addProductToCart}>
+                                    booo
+                                </Button>)}
+
+
+                        </CartConsumer>
+
                         <Link to={"/products/" + product.id}>
                             <h1>{product.title}</h1>
                             <p>{product.descreption}</p>
                             <img src={require("./../assets/" + product.img)} alt="pic" style={poster} className='movieImg' />
                             <h3>Köp: {product.price} SEK</h3>
                         </Link>
-                        <Button>Add to cart</Button>
-
                     </div >
 
                 )
