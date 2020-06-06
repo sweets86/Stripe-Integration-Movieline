@@ -26,7 +26,7 @@ function DetailView(props: Props) {
                     return (
                         <div key={product.id} style={productCards}>
                             <h1 style={TitleLink}>{product.title}</h1>
-                            <p>{product.descreption}</p>
+                            <p>{product.fullDescription}</p>
                             <img src={require("./../assets/" + product.img)} style={poster} className='movieImg' />
                             <h3>Köp: {product.price} SEK</h3>
                             <Button>Add to cart</Button>
