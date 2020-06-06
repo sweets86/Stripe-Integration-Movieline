@@ -3,6 +3,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { CartConsumer, ContextState } from '../context/cartContext'
 import { productsContainer, productCards, poster, TitleLink } from '../css'
+import { Button } from '@blueprintjs/core'
 
 interface Params {
     cart: string
@@ -23,13 +24,14 @@ function CartView(props: Props) {
                         {
                             contextData.cartList.length ?
 
-                                contextData.cartList.map((product) => {
+                                contextData.cartList.map((product, index: number) => {
                                     return (
                                         <div style={productCards}>
                                             <h3 style={TitleLink}>{product.title}</h3>
                                             <img src={require("./../assets/" + product.img)} alt="pic" style={poster} />
                                             <h3>{product.price} SEK</h3>
-                                            <h3>Antal (Remove/Add more)</h3>
+                                            <Button onClick={() => contextData.deletefromcart(product, index)}>Delete from cart</Button>
+                                            <h3>Antal (Add more)</h3>
                                         </div>
                                     )
                                 })
