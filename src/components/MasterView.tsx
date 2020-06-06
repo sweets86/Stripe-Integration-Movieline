@@ -1,10 +1,9 @@
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, Consumer } from 'react'
 import { products } from "../products"
 import { Product } from "../products"
 import { Button } from '@blueprintjs/core'
 import { Link } from 'react-router-dom'
-import { CartConsumer } from '../contexts/cartContext'
-
+import { CartConsumer, ContextState } from '../context/cartContext'
 
 
 interface Props {
@@ -31,37 +30,36 @@ export default class MasterView extends React.Component {
         if (productList.length) {
             return productList.map((product) => {
                 return (
-                    <div key={product.id}>
-                        <CartConsumer>
-                            {({ addProductToCart }) => (
-                                <Button onClick={addProductToCart}>
-                                    booo
-                                </Button>)}
-
-
-                        </CartConsumer>
-
+                    <div key={product.id} style={productCards}>
                         <Link to={"/products/" + product.id}>
-                            <h1>{product.title}</h1>
-                            <p>{product.descreption}</p>
-                            <img src={require("./../assets/" + product.img)} alt="pic" style={poster} className='movieImg' />
-                            <h3>Köp: {product.price} SEK</h3>
+                            <h1 style={TitleLink}>{product.title}</h1>
                         </Link>
+
+                        <p>{product.descreption}</p>
+                        <img src={require("./../assets/" + product.img)} alt="pic" style={poster} className='movieImg' />
+                        <h3>Köp: {product.price} SEK</h3>
+                        <CartConsumer>
+                        {(contextData: ContextState) => {
+                            return (
+                                <Button onClick={() => contextData.addProductToCart(product)}>Add to cart</Button>
+                            )
+                        }}
+                        </CartConsumer>
                     </div >
 
                 )
             })
+
+
         } else {
             return "sdd"
         }
     };
 
     render() {
-        return (
-            <div style={productsContainer}>
-                {this.loopThis}
-            </div>
-        )
+        return <div style={productsContainer}>
+            {this.loopThis}
+        </div>
     }
 
 
@@ -80,7 +78,7 @@ const productCards: CSSProperties = {
     width: '100%',
     margin: '2%',
     padding: '20px',
-    backgroundColor: 'white'
+    backgroundColor: '#ccc7c7'
 
 }
 
@@ -89,6 +87,10 @@ const poster: CSSProperties = {
     width: '70%'
 }
 
+const TitleLink: CSSProperties = {
+    textDecoration: 'none',
+    color: 'black'
+}
 
 
 

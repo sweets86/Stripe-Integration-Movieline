@@ -1,8 +1,9 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { CartConsumer } from '../contexts/cartContext'
-
+import { CartConsumer, ContextState } from '../context/cartContext'
+import { productsContainer, productCards, poster, TitleLink } from '../css'
+import { Button } from '@blueprintjs/core'
 
 interface Params {
     cart: string
@@ -15,35 +16,36 @@ function CartView(props: Props) {
     const cart = props.match.params.cart
 
     return (
-        <div>
-            <CartConsumer>
-                {({ cartList }) => (
-                    <div>
-                        {cartList.map((product) => {
-                            return (
-                                <div key={product.id}>
-                                    <Link to={"/products/" + product.id}>
-                                        <h1>{product.title}</h1>
-                                        <p>{product.descreption}</p>
-                                        <img src={require("./../assets/" + product.img)} alt="pic" />
-                                        <h3>Köp: {product.price} SEK</h3>
-                                    </Link>
+        <CartConsumer>
+            {(contextData: ContextState) => {
+                return (
+                    <div style={productsContainer}>
+                        <h1>Cart</h1>
+                        {
+                            contextData.cartList.length ?
 
-                                </div >
-                            )
-                        })}
+                                contextData.cartList.map((product, index: number) => {
+                                    return (
+                                        <div style={productCards}>
+                                            <h3 style={TitleLink}>{product.title}</h3>
+                                            <img src={require("./../assets/" + product.img)} alt="pic" style={poster} />
+                                            <h3>{product.price} SEK</h3>
+                                            <Button onClick={() => contextData.deletefromcart(product, index)}>Delete from cart</Button>
+                                            <h3>Antal (Add more)</h3>
+                                        </div>
+                                    )
+                                })
+                                :
+                                <h4>No items in cart...</h4>
+                        }
+                        <h3>Total Pris</h3>
+                        <Link to='/checkout/'>
+                            <h1>Go To checkout</h1>
+                        </Link>
                     </div>
-                )}
-            </CartConsumer>
-            <div style={container}>
-                <h1>
-                    Hej Kundvagnsida
-            </h1>
-                <Link to='/checkout/'>
-                    <h1>Go To checkout</h1>
-                </Link>
-            </div>
-        </div>
+                )
+            }}
+        </CartConsumer>
     )
 };
 
