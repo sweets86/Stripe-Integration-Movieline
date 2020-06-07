@@ -22,62 +22,64 @@ export default class CheckoutView extends React.Component<Props> {
 
     render() {
         return (
-            <div style={container}>
-                <Card style={info}>
+            <div style={checkoutStyle} className="pt-card pt-elevation-0">
 
-                    <Card>
-                        <h1  style={{fontSize:'bold' }}> Your information</h1>
-                        <FormGroup>
-                            <Label htmlFor="input-b">Enter Name</Label>
-                            <InputGroup id="text-input" placeholder="Enter name" />
-                            <Label htmlFor="input-b">Enter Email</Label>
-                            <InputGroup id="text-input" placeholder="Enter email" />
-                            <Label htmlFor="input-b">Enter Telephone</Label>
-                            <InputGroup id="text-input" placeholder="Enter telephone" />
-                            <Label htmlFor="input-b">Enter Address</Label>
-                            <InputGroup id="text-input" placeholder="Enter Address" />
-                            <h2  style={{fontSize:'bold' }}> Our payment methods</h2>
-                            <Menu>
-                                <MenuItem text="Submenu">
-                                <MenuItem text="Visa Card" />
-                                    <MenuItem text="Swish" />
-                                    <MenuItem text="PayPal" />
-                                </MenuItem>
-                            </Menu>
-                        </FormGroup>
-                    </Card>
+                <div style={cardStyle}>
+                <h2>The Cart </h2>    
+                
+                </div>
 
-                    <Card>
+                <div style={cardStyle}>
+                <h2>Your Info</h2>
+                    <FormGroup>
+                        <Label htmlFor="input-b">Enter Name</Label>
+                        <InputGroup id="text-input" placeholder="Enter name" />
+                        <Label htmlFor="input-b">Enter Email</Label>
+                        <InputGroup id="text-input" placeholder="Enter email" />
+                        <Label htmlFor="input-b">Enter Telephone</Label>
+                        <InputGroup id="text-input" placeholder="Enter telephone" />
+                        <Label htmlFor="input-b">Enter Address</Label>
+                        <InputGroup id="text-input" placeholder="Enter Address" />
+                        <h2  style={{fontSize:'bold' }}> Our payment methods</h2>
+                        <Menu>
+                            <MenuItem text="Submenu">
+                            <MenuItem text="Visa Card" />
+                                <MenuItem text="Swish" />
+                                <MenuItem text="PayPal" />
+                            </MenuItem>
+                        </Menu>
+                    </FormGroup>
+                </div>
 
-                        <h2  style={{fontSize:'bold' }}> The cart</h2>
-                        <Table>
-                        </Table>
+                <div style={cardStyle}>
+                <h2>Delivery</h2>
+    
+                </div>
 
-                    </Card>
-
-                </Card>
+                <div style={cardStyle}>
+                <h2>Payment</h2>
                 <Button>Order confirmation</Button>
+                </div>       
                 <DetailCheckoutView />
             </div>
         )
     }
 };
 
-const container: React.CSSProperties = {
+const checkoutStyle: React.CSSProperties = {
     display: "flex",
+    flexDirection:'row',
     flexWrap: "wrap",
-    margin: '0 auto',
     justifyContent: "center",
-    textAlign: "center",
-    width: "80%",
-    flexDirection: "column",
-    position: "fixed",
-    height: '80%',
-    backgroundColor: '#f0f0f0'
+
 }
 
-const info: React.CSSProperties = {
-    display: "flex",
-    flexWrap: "wrap",
-    margin: '0 auto',  
+
+const cardStyle: React.CSSProperties = {
+    maxWidth:"60%",
+    minWidth:"300px",
+    flex:"1",
+    margin:"0.2px",
+    padding:'8px',
+    border: '1px solid #487cc5'
 }
