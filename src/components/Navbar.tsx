@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react'
 import {Link } from 'react-router-dom'
 import {Alignment, Button, Navbar} from "@blueprintjs/core";
+import { CartConsumer, ContextState } from '../context/cartContext'
 
 export default function viewNavBar() {
     return (
@@ -18,7 +19,10 @@ export default function viewNavBar() {
                    
                         <Link to='/cart/'>
                             <Button className="bp3-button bp3-minimal bp3-icon-shopping-cart" style={cartChildren}/>
-                            <span style={cartChildren}>(...)</span>
+                            <CartConsumer>
+                                {(contextData: ContextState) => { return (<span style={cartChildren}>{contextData.cartList.length}</span>)}}
+                            </CartConsumer>
+                            
                         </Link>
                  
                 </Navbar.Group>
