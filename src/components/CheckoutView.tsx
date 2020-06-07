@@ -34,20 +34,15 @@ export default class CheckoutView extends React.Component<Props> {
                     <FormGroup>
                         <Label htmlFor="input-b">Enter Name</Label>
                         <InputGroup id="text-input" placeholder="Enter name" />
+                        <br/>
                         <Label htmlFor="input-b">Enter Email</Label>
                         <InputGroup id="text-input" placeholder="Enter email" />
+                        <br/>
                         <Label htmlFor="input-b">Enter Telephone</Label>
                         <InputGroup id="text-input" placeholder="Enter telephone" />
+                        <br/>
                         <Label htmlFor="input-b">Enter Address</Label>
                         <InputGroup id="text-input" placeholder="Enter Address" />
-                        <h2  style={{fontSize:'bold' }}> Our payment methods</h2>
-                        <Menu>
-                            <MenuItem text="Submenu">
-                            <MenuItem text="Visa Card" />
-                                <MenuItem text="Swish" />
-                                <MenuItem text="PayPal" />
-                            </MenuItem>
-                        </Menu>
                     </FormGroup>
                 </div>
 
@@ -58,6 +53,15 @@ export default class CheckoutView extends React.Component<Props> {
 
                 <div style={cardStyle}>
                 <h2>Payment</h2>
+                
+                <Menu>
+                    <MenuItem text="chouse your method">
+                    <MenuItem text="Visa Card" />
+                        <MenuItem text="Swish" />
+                        <MenuItem text="PayPal" />
+                    </MenuItem>
+                </Menu>
+                <br/>
                 <Button>Order confirmation</Button>
                 </div>       
                 <DetailCheckoutView />
