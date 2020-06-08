@@ -3,6 +3,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { CartConsumer, ContextState } from '../context/cartContext'
 import { productsContainer, productCards, poster, TitleLink } from '../css'
+import { Button } from '@blueprintjs/core'
 
 interface Params {
     cart: string
@@ -18,18 +19,19 @@ function CartView(props: Props) {
         <CartConsumer>
             {(contextData: ContextState) => {
                 return (
-                    <div style={cartContainer}>
-                        <h1 style={cartTitle}>Cart</h1>
+                    <div style={productsContainer}>
+                        <h1>Cart</h1>
                         {
-                            contextData.cartList.length ?
+                            contextData.cartItems.length ?
 
-                                contextData.cartList.map((product) => {
+                                contextData.cartItems.map((product, index: number) => {
                                     return (
-                                        <div style={singleCartItem}>
-                                            <h3 style={childrenFlex}>{product.title}</h3>
-                                            <img src={require("./../assets/" + product.img)} alt="pic" style={{...posterInCart, ...childrenFlex}} />
-                                            <h3 style={childrenFlex}>{product.price} SEK</h3>
-                                            <h3 style={childrenFlex}>Antal (Remove/Add more)</h3>
+                                        <div style={productCards}>
+                                            <h3 style={TitleLink}>{product.title}</h3>
+                                            <img src={require("./../assets/" + product.img)} alt="pic" style={poster} />
+                                            <h3>{product.price} SEK</h3>
+                                            <Button onClick={() => contextData.deletefromcart(product, index)}>Delete from cart</Button>
+                                            <h3>Antal (Add more)</h3>
                                         </div>
                                     )
                                 })
@@ -49,32 +51,12 @@ function CartView(props: Props) {
 
 export default CartView
 
-
-const cartTitle: React.CSSProperties = {
-    textAlign: 'center'
-}
-
-const cartContainer: React.CSSProperties = {
-    width: '100%',
-    height: 'auto',
-   
-    
-}
-
-const singleCartItem: React.CSSProperties = {
-    width: '100%',
-    height: '20%',
-    display: 'flex',
-    border: 'grey solid 1px',
-    flexWrap: 'wrap'
-}
-
-const posterInCart: React.CSSProperties = {
-    order: 'initial'
-}
-
-const childrenFlex: React.CSSProperties = {
-    padding: '2%',
-    margin: '2%',
-    width: '200px'
+const container: React.CSSProperties = {
+    display: "flex",
+    justifyContent: "center",
+    textAlign: "center",
+    width: "100%",
+    flexDirection: "column",
+    position: "fixed",
+    height: '100%',
 }
