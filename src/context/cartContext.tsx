@@ -53,7 +53,13 @@ export class CartProvider extends Component<{}, ProviderState> {
         this.setState({ cartItems: clonedCart }, () => { console.log(this.state) })
     }
 
-    //remove function
+    deletefromcart = (product: Product, index: number) => {
+        const clonedCart = Object.assign([], this.state.cartItems)
+        clonedCart.splice(index, 1)
+        this.setState({ cartItems: clonedCart }, () => { console.log(this.state) })
+    }
+
+
 
     render() {
         return (
