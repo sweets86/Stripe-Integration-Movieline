@@ -41,9 +41,9 @@ export class CartProvider extends Component<{}, ProviderState> {
 
     }
 
-    deletefromcart = (product: Product, index) => {
+    deletefromcart = (product: Product, index: number) => {
         const clonedCart = Object.assign([], this.state.cartList)
-        clonedCart.slice(index, 1)
+        clonedCart.splice(index, 1)
         this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
     }
 
