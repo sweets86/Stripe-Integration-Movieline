@@ -5,6 +5,7 @@ import { Product } from "../products"
 import { Button } from '@blueprintjs/core'
 import { productsContainer, productCards, poster, TitleLink } from '../css'
 
+
 interface Params {
     id: string
 }
@@ -13,7 +14,7 @@ interface Props extends RouteComponentProps<Params> {}
 
 const productList: Product[] = products
 
-// Produktsida- Productpage
+
 function DetailView(props: Props) {
     const id = props.match.params.id
 

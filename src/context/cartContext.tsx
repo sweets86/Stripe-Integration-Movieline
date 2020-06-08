@@ -3,12 +3,17 @@ import { Product } from '../products'
 
 
 export interface ProviderState {
-    cartList: Product[]
+    cartList: [{
+        product: Product,
+        quantity: number
+    }
+    ]
+
 }
 
 export interface ContextState extends ProviderState {
     addProductToCart: (product: Product) => void
-    //remove
+    deletefromcart: (product: Product, index: number) => void
 }
 
 export const CartContext = createContext<ContextState>({
@@ -17,6 +22,8 @@ export const CartContext = createContext<ContextState>({
         console.log(("Something went wrong with adding " + product.title + "to cart" )
     )}
 })
+
+
 
 export const CartConsumer = CartContext.Consumer
 
@@ -31,9 +38,14 @@ export class CartProvider extends Component<{}, ProviderState> {
 
     addProductToCart = (product: Product) => {
         const clonedCart = Object.assign([], this.state.cartList)
-        clonedCart.push(product)
-        this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
 
+        const foundProductIndex = this.state.cartList.findIndex((produktToFind: Product) => {
+            return product.id === produktToFind.id
+        })
+
+        if (foundProductIndex == -1) { clonedCart.push(product) }
+        else { clonedCart[foundProductIndex].quantity++ }
+        this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
     }
 
     //remove function
