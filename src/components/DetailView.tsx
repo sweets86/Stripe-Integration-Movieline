@@ -1,34 +1,41 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
+import { products } from "../products"
+import { Product } from "../products"
+import { Button } from '@blueprintjs/core'
+import { productsContainer, productCards, poster, TitleLink } from '../css'
 
 
 interface Params {
     id: string
 }
 
-interface Props extends RouteComponentProps<Params> { }
+interface Props extends RouteComponentProps<Params> {}
+
+const productList: Product[] = products
 
 
 function DetailView(props: Props) {
     const id = props.match.params.id
-    console.log(id)
+
+    const numberId = parseFloat(id)
 
     return (
-        <div style={container}>
-            <h1>Hej, Produktsida</h1>
-            <h1>{id}</h1>
+        <div style={productsContainer}>
+            {productList.map((product) => {
+                if (product.id === numberId)
+                    return (
+                        <div key={product.id} style={productCards}>
+                            <h1 style={TitleLink}>{product.title}</h1>
+                            <p>{product.fullDescription}</p>
+                            <img src={require("./../assets/" + product.img)} style={poster} className='movieImg' />
+                            <h3>Köp: {product.price} SEK</h3>
+                            <Button>Add to cart</Button>
+                        </div>
+                    )
+            })}
         </div>
     )
 };
 
 export default DetailView
-
-const container: React.CSSProperties = {
-    display: "flex",
-    justifyContent: "center",
-    textAlign: "center",
-    width: "100%",
-    flexDirection: "column",
-    position: "fixed",
-    height: '100%',
-}

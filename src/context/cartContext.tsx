@@ -19,12 +19,8 @@ export interface ContextState extends ProviderState {
 export const CartContext = createContext<ContextState>({
     cartList: [],
     addProductToCart: (product: Product) => {
-        console.log(("Something went wrong with adding " + product.title + "to cart")
-        )
-    },
-    deletefromcart: (product: Product, index: number) => {
-        console.log("something went wrong while trying to delete" + product.title + "from the cart")
-    }
+        console.log(("Something went wrong with adding " + product.title + "to cart" )
+    )}
 })
 
 
@@ -52,20 +48,14 @@ export class CartProvider extends Component<{}, ProviderState> {
         this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
     }
 
-    deletefromcart = (product: Product, index: number) => {
-        const clonedCart = Object.assign([], this.state.cartList)
-        clonedCart.splice(index, 1)
-        this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
-    }
-
     //remove function
 
     render() {
         return (
             <CartContext.Provider value={{
                 ...this.state,
-                addProductToCart: this.addProductToCart,
-                deletefromcart: this.deletefromcart
+                addProductToCart: this.addProductToCart
+                //remove
 
             }}>
                 {this.props.children}
