@@ -3,11 +3,7 @@ import { Product } from '../products'
 
 
 export interface ProviderState {
-<<<<<<< Updated upstream
     cartList: Product[]
-=======
-    cartList: Product []
->>>>>>> Stashed changes
 }
 
 export interface ContextState extends ProviderState {
