@@ -5,7 +5,6 @@ export interface Product {
     descreption: string
     img: string
     price: number
-
 }
 
 export const products: Product[] = [{
