@@ -1,4 +1,4 @@
-import React, { CSSProperties, Consumer } from 'react'
+import React, { CSSProperties } from 'react'
 import { products } from "../products"
 import { Product } from "../products"
 import { Button } from '@blueprintjs/core'
@@ -30,6 +30,8 @@ export default class MasterView extends React.Component {
         if (productList.length) {
             return productList.map((product) => {
                 return (
+
+
                     <div key={product.id} style={productCards}>
                         <Link to={"/products/" + product.id}>
                             <h1 style={TitleLink}>{product.title}</h1>
@@ -49,8 +51,6 @@ export default class MasterView extends React.Component {
 
                 )
             })
-
-
         } else {
             return "sdd"
         }

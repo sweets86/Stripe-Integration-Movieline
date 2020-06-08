@@ -4,6 +4,7 @@ import { products } from "../products"
 import { Product } from "../products"
 import { Button } from '@blueprintjs/core'
 import { productsContainer, productCards, poster, TitleLink } from '../css'
+import { CartConsumer, ContextState } from '../context/cartContext'
 
 
 interface Params {
@@ -30,7 +31,13 @@ function DetailView(props: Props) {
                             <p>{product.fullDescription}</p>
                             <img src={require("./../assets/" + product.img)} style={poster} className='movieImg' />
                             <h3>Köp: {product.price} SEK</h3>
-                            <Button>Add to cart</Button>
+                            <CartConsumer>
+                            {(contextData: ContextState) => {
+                                return (
+                                    <Button onClick={() => contextData.addProductToCart(product)}>Add to cart</Button>
+                                )
+                            }}
+                        </CartConsumer>
                         </div>
                     )
             })}
