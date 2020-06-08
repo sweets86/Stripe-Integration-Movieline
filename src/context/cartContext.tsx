@@ -8,14 +8,19 @@ export interface ProviderState {
 
 export interface ContextState extends ProviderState {
     addProductToCart: (product: Product) => void
-    //remove
+    deletefromcart: (product: Product, index: number) => void
 }
 
 export const CartContext = createContext<ContextState>({
     cartList: [],
     addProductToCart: (product: Product) => {
-        console.log(("Something went wrong with adding " + product.title + "to cart" )
-    )}
+        console.log(("Something went wrong with adding " + product.title + "to cart")
+        )
+    },
+    deletefromcart: (product: Product) => {
+        console.log(("Something went wrong while deleting " + product.title + "to cart")
+        )
+    }
 })
 
 export const CartConsumer = CartContext.Consumer
@@ -36,14 +41,18 @@ export class CartProvider extends Component<{}, ProviderState> {
 
     }
 
-    //remove function
+    deletefromcart = (product: Product, index) => {
+        const clonedCart = Object.assign([], this.state.cartList)
+        clonedCart.slice(index, 1)
+        this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
+    }
 
     render() {
         return (
             <CartContext.Provider value={{
                 ...this.state,
-                addProductToCart: this.addProductToCart
-                //remove
+                addProductToCart: this.addProductToCart,
+                deletefromcart: this.deletefromcart
 
             }}>
                 {this.props.children}
