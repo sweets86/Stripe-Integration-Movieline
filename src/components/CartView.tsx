@@ -51,12 +51,31 @@ function CartView(props: Props) {
 
 export default CartView
 
-const container: React.CSSProperties = {
-    display: "flex",
-    justifyContent: "center",
-    textAlign: "center",
-    width: "100%",
-    flexDirection: "column",
-    position: "fixed",
-    height: '100%',
+const cartTitle: React.CSSProperties = {
+    textAlign: 'center'
+}
+
+const cartContainer: React.CSSProperties = {
+    width: '100%',
+    height: 'auto',
+
+
+}
+
+const singleCartItem: React.CSSProperties = {
+    width: '100%',
+    height: '20%',
+    display: 'flex',
+    border: 'grey solid 1px',
+    flexWrap: 'wrap'
+}
+
+const posterInCart: React.CSSProperties = {
+    order: 'initial'
+}
+
+const childrenFlex: React.CSSProperties = {
+    padding: '2%',
+    margin: '2%',
+    width: '200px'
 }
