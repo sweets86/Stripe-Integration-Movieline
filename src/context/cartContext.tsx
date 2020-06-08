@@ -27,24 +27,18 @@ export const CartConsumer = CartContext.Consumer
 
 export class CartProvider extends Component<{}, ProviderState> {
 
-
     constructor(props: {}) {
         super(props)
         this.state = {
-            cartItems: []
+            cartList: []
         }
     }
 
     addProductToCart = (product: Product) => {
-        const clonedCart = Object.assign([], this.state.cartItems)
+        const clonedCart = Object.assign([], this.state.cartList)
+        clonedCart.push(product)
+        this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
 
-        const foundProductIndex = this.state.cartItems.findIndex((produktToFind: Product) => {
-            return product.id === produktToFind.id
-        })
-
-        if (foundProductIndex == -1) { clonedCart.push(product) }
-        else { clonedCart[foundProductIndex].quantity++ }
-        this.setState({ cartItems: clonedCart }, () => { console.log(this.state) })
     }
 
     deletefromcart = (product: Product, index: number) => {
