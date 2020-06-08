@@ -22,9 +22,9 @@ function CartView(props: Props) {
                     <div style={productsContainer}>
                         <h1>Cart</h1>
                         {
-                            contextData.cartItems.length ?
+                            contextData.cartList.length ?
 
-                                contextData.cartItems.map((product, index: number) => {
+                                contextData.cartList.map((product, index: number) => {
                                     return (
                                         <div style={productCards}>
                                             <h3 style={TitleLink}>{product.title}</h3>

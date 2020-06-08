@@ -3,12 +3,7 @@ import { Product } from '../products'
 
 
 export interface ProviderState {
-    cartItems: {
-        product: Product,
-        quantity: number
-    }[]
-
-
+    cartList: Product[]
 }
 
 export interface ContextState extends ProviderState {
@@ -17,7 +12,7 @@ export interface ContextState extends ProviderState {
 }
 
 export const CartContext = createContext<ContextState>({
-    cartItems: [],
+    cartList: [],
     addProductToCart: (product: Product) => {
         console.log(("Something went wrong with adding " + product.title + "to cart")
         )
@@ -37,26 +32,19 @@ export class CartProvider extends Component<{}, ProviderState> {
     constructor(props: {}) {
         super(props)
         this.state = {
-            cartItems: []
+            cartList: []
         }
     }
 
     addProductToCart = (product: Product) => {
-        const clonedCart = Object.assign([], this.state.cartItems)
-
-        const foundProductIndex = this.state.cartItems.findIndex((produktToFind: Product) => {
-            return product.id === produktToFind.id
-        })
-
-        if (foundProductIndex == -1) { clonedCart.push(product) }
-        else { clonedCart[foundProductIndex].quantity++ }
-        this.setState({ cartItems: clonedCart }, () => { console.log(this.state) })
+        const clonedCart = Object.assign([], this.state.cartList)
+        this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
     }
 
     deletefromcart = (product: Product, index: number) => {
-        const clonedCart = Object.assign([], this.state.cartItems)
+        const clonedCart = Object.assign([], this.state.cartList)
         clonedCart.splice(index, 1)
-        this.setState({ cartItems: clonedCart }, () => { console.log(this.state) })
+        this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
     }
 
 
