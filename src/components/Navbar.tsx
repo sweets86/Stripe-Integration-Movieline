@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react'
-import {Link } from 'react-router-dom'
-import {Alignment, Button, Navbar} from "@blueprintjs/core";
+import { Link } from 'react-router-dom'
+import { Alignment, Button, Navbar } from "@blueprintjs/core";
 
 export default function viewNavBar() {
     return (
@@ -9,16 +9,15 @@ export default function viewNavBar() {
 
                 <Navbar.Group align={Alignment.LEFT} >
                     <Link to='/'>
-                        <Navbar.Heading  style={styleHeading}>MovieLine</Navbar.Heading>
+                        <Navbar.Heading style={styleHeading}>MovieLine</Navbar.Heading>
                     </Link>
                 </Navbar.Group>
-        
+
                 <Navbar.Group align={Alignment.RIGHT}>
 
 
                     <Link to='/cart/'>
-                        <Button className="bp3-button bp3-minimal bp3-icon-shopping-cart" style={styleIcon}/>
-
+                        <Button className="bp3-button bp3-minimal bp3-icon-shopping-cart" style={styleIcon} />
                     </Link>
                 </Navbar.Group>
 
@@ -27,17 +26,17 @@ export default function viewNavBar() {
     )
 };
 
-const styleNavBar:CSSProperties ={
+const styleNavBar: CSSProperties = {
     backgroundColor: "#212121",
     height: "63PX",
     width: "100%",
     position: "sticky",
 }
 
-const styleIcon:CSSProperties ={
+const styleIcon: CSSProperties = {
     display: "flex",
     width: "100px",
-    alignItems:"center",
+    alignItems: "center",
     justifyItems: 'right',
     fontSize: "32px",
     position: "relative",
@@ -46,9 +45,9 @@ const styleIcon:CSSProperties ={
     marginTop: "23px"
 }
 
-const styleHeading:CSSProperties ={
+const styleHeading: CSSProperties = {
     display: "inline-block",
-    alignItems:"right",
+    alignItems: "right",
     fontWeight: "bold",
     fontSize: "30px",
     color: "#FFFFFF",

@@ -1,15 +1,19 @@
 import React, { createContext, Component } from 'react'
-import { Product, products } from '../products'
+import { Product } from '../products'
 
 
 export interface ProviderState {
-    cartList: Product[]
+    cartList: [{
+        product: Product,
+        quantity: number
+    }
+    ]
+
 }
 
 export interface ContextState extends ProviderState {
     addProductToCart: (product: Product) => void
     deletefromcart: (product: Product, index: number) => void
-    //remove
 }
 
 export const CartContext = createContext<ContextState>({
@@ -22,6 +26,8 @@ export const CartContext = createContext<ContextState>({
         console.log("something went wrong while trying to delete" + product.title + "from the cart")
     }
 })
+
+
 
 export const CartConsumer = CartContext.Consumer
 
@@ -36,9 +42,14 @@ export class CartProvider extends Component<{}, ProviderState> {
 
     addProductToCart = (product: Product) => {
         const clonedCart = Object.assign([], this.state.cartList)
-        clonedCart.push(product)
-        this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
 
+        const foundProductIndex = this.state.cartList.findIndex((produktToFind: Product) => {
+            return product.id === produktToFind.id
+        })
+
+        if (foundProductIndex == -1) { clonedCart.push(product) }
+        else { clonedCart[foundProductIndex].quantity++ }
+        this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
     }
 
     deletefromcart = (product: Product, index: number) => {

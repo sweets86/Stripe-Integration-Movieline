@@ -8,7 +8,7 @@ interface Params {
 
 interface Props extends RouteComponentProps<Params> { }
 
-// Produktsida- Productpage
+
 function DetailView(props: Props) {
     const id = props.match.params.id
     console.log(id)
