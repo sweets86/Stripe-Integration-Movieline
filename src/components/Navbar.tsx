@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react'
 import {Link } from 'react-router-dom'
 import {Alignment, Button, Navbar} from "@blueprintjs/core";
+import { CartConsumer, ContextState } from '../context/cartContext'
 
 export default function viewNavBar() {
     return (
@@ -13,15 +14,18 @@ export default function viewNavBar() {
                     </Link>
                 </Navbar.Group>
         
-                <Navbar.Group align={Alignment.RIGHT}>
+                <Navbar.Group align={Alignment.RIGHT} style={cartContainer}>
 
-
-                    <Link to='/cart/'>
-                        <Button className="bp3-button bp3-minimal bp3-icon-shopping-cart" style={styleIcon}/>
-
-                    </Link>
+                   
+                        <Link to='/cart/'>
+                            <Button className="bp3-button bp3-minimal bp3-icon-shopping-cart" style={cartChildren}/>
+                            <CartConsumer>
+                                {(contextData: ContextState) => { return (<span style={cartChildren}>{contextData.cartList.length}</span>)}}
+                            </CartConsumer>
+                            
+                        </Link>
+                 
                 </Navbar.Group>
-
             </Navbar>}
         </div>
     )
@@ -34,16 +38,9 @@ const styleNavBar:CSSProperties ={
     position: "sticky",
 }
 
-const styleIcon:CSSProperties ={
-    display: "flex",
-    width: "100px",
-    alignItems:"center",
-    justifyItems: 'right',
-    fontSize: "32px",
-    position: "relative",
-    color: "#FFFFFF",
-    margin: "8px",
-    marginTop: "23px"
+const cartChildren:CSSProperties ={
+    width: '50%',
+    color: 'white'
 }
 
 const styleHeading:CSSProperties ={
@@ -54,4 +51,12 @@ const styleHeading:CSSProperties ={
     color: "#FFFFFF",
     margin: "8px",
     marginTop: "17px"
+}
+
+const cartContainer:CSSProperties ={
+    width: '40%',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginTop: '7px',
+    marginRight: '3%'
 }

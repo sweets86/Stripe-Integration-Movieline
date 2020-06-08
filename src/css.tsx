@@ -1,4 +1,4 @@
-import React, {CSSProperties} from 'react'
+import {CSSProperties} from 'react'
 
 export const productsContainer: CSSProperties = {
     display: 'flex',
@@ -13,12 +13,12 @@ export const productCards: CSSProperties = {
     margin: '2%',
     padding: '20px',
     backgroundColor: '#ccc7c7'
-    
+
 }
 
 export const poster: CSSProperties = {
-  objectFit: 'cover',
-  width: '70%'    
+    objectFit: 'cover',
+    width: '70%'
 }
 
 export const TitleLink: CSSProperties = {
