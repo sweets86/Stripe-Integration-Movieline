@@ -1,9 +1,8 @@
-import React, { CSSProperties, Consumer } from 'react'
+import React, { CSSProperties } from 'react'
 import { products } from "../products"
 import { Product } from "../products"
 import { Button } from '@blueprintjs/core'
 import { Link } from 'react-router-dom'
-import { CartConsumer, ContextState } from '../context/cartContext'
 
 
 interface Props {
@@ -25,14 +24,16 @@ export default class MasterView extends React.Component {
         super(props)
 
     }
-
+    
     get loopThis() {
         if (productList.length) {
             return productList.map((product) => {
                 return (
-                    <div key={product.id} style={productCards}>
+
+
+                    <div key={product.id} style={ productCards }>
                         <Link to={"/products/" + product.id}>
-                            <h1 style={TitleLink}>{product.title}</h1>
+                            <h1 style={ TitleLink }>{product.title}</h1>
                         </Link>
 
                         <p>{product.descreption}</p>
@@ -46,11 +47,9 @@ export default class MasterView extends React.Component {
                             }}
                         </CartConsumer>
                     </div >
-
+                    
                 )
             })
-
-
         } else {
             return "sdd"
         }
@@ -79,12 +78,12 @@ const productCards: CSSProperties = {
     margin: '2%',
     padding: '20px',
     backgroundColor: '#ccc7c7'
-
+    
 }
 
 const poster: CSSProperties = {
-    objectFit: 'cover',
-    width: '70%'
+  objectFit: 'cover',
+  width: '70%'    
 }
 
 const TitleLink: CSSProperties = {
