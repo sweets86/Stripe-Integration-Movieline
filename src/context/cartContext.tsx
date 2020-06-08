@@ -65,8 +65,8 @@ export class CartProvider extends Component<{}, ProviderState> {
         return (
             <CartContext.Provider value={{
                 ...this.state,
-                addProductToCart: this.addProductToCart
-                //remove
+                addProductToCart: this.addProductToCart,
+                deletefromcart: this.deletefromcart
 
             }}>
                 {this.props.children}
