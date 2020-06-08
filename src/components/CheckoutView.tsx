@@ -2,7 +2,6 @@ import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import DetailCheckoutView from './DetailCheckoutView'
 import { Button, Card, Label, MenuItem, Menu, FormGroup, InputGroup,} from "@blueprintjs/core"
-import { Cell, Column, Table } from "@blueprintjs/table";
 
 interface Params {
     checkout: string
