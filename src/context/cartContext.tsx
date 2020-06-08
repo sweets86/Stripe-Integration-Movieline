@@ -1,9 +1,14 @@
 import React, { createContext, Component } from 'react'
-import { Product } from '../products'
+import { Product, products } from '../products'
 
+
+interface CartItem {
+    product: Product,
+    quantity: number
+}
 
 export interface ProviderState {
-    cartList: Product[]
+    cartItems: CartItem[]
 }
 
 export interface ContextState extends ProviderState {
@@ -12,7 +17,7 @@ export interface ContextState extends ProviderState {
 }
 
 export const CartContext = createContext<ContextState>({
-    cartList: [],
+    cartItems: [],
     addProductToCart: (product: Product) => {
         console.log(("Something went wrong with adding " + product.title + "to cart")
         )
@@ -30,21 +35,29 @@ export class CartProvider extends Component<{}, ProviderState> {
     constructor(props: {}) {
         super(props)
         this.state = {
-            cartList: []
+            cartItems: []
         }
     }
 
     addProductToCart = (product: Product) => {
-        const clonedCart = Object.assign([], this.state.cartList)
-        clonedCart.push(product)
-        this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
+        const clonedCart: CartItem[] = Object.assign([], this.state.cartItems)
 
+        const foundProductIndex: number = this.state.cartItems.findIndex((produktToFind) => {
+            return product.id === produktToFind.product.id
+        })
+        console.log(foundProductIndex)
+        if (foundProductIndex === -1) { clonedCart.push({ product: product, quantity: 1 }) }
+        else { //incermintproduct()
+            clonedCart[foundProductIndex].quantity++
+
+        }
+        this.setState({ cartItems: clonedCart }, () => { console.log(this.state) })
     }
 
     deletefromcart = (product: Product, index: number) => {
-        const clonedCart = Object.assign([], this.state.cartList)
+        const clonedCart = Object.assign([], this.state.cartItems)
         clonedCart.splice(index, 1)
-        this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
+        this.setState({ cartItems: clonedCart }, () => { console.log(this.state) })
     }
 
     render() {
@@ -52,8 +65,7 @@ export class CartProvider extends Component<{}, ProviderState> {
             <CartContext.Provider value={{
                 ...this.state,
                 addProductToCart: this.addProductToCart,
-                deletefromcart: this.deletefromcart
-
+                deletefromcart: this.deletefromcart,
             }}>
                 {this.props.children}
             </CartContext.Provider>
