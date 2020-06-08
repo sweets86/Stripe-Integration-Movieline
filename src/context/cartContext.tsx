@@ -38,6 +38,7 @@ export class CartProvider extends Component<{}, ProviderState> {
 
     addProductToCart = (product: Product) => {
         const clonedCart = Object.assign([], this.state.cartList)
+        clonedCart.push(product)
         this.setState({ cartList: clonedCart }, () => { console.log(this.state) })
     }
 

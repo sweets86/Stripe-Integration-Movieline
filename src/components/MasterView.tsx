@@ -39,11 +39,11 @@ export default class MasterView extends React.Component {
                         <img src={require("./../assets/" + product.img)} alt="pic" style={poster} className='movieImg' />
                         <h3>Köp: {product.price} SEK</h3>
                         <CartConsumer>
-                        {(contextData: ContextState) => {
-                            return (
-                                <Button onClick={() => contextData.addProductToCart(product)}>Add to cart</Button>
-                            )
-                        }}
+                            {(contextData: ContextState) => {
+                                return (
+                                    <Button onClick={() => contextData.addProductToCart(product)}>Add to cart</Button>
+                                )
+                            }}
                         </CartConsumer>
                     </div >
 
