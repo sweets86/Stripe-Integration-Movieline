@@ -34,14 +34,14 @@ export default class CheckoutView extends React.Component<Props> {
                             <div>
                                
                                 {
-                                    contextData.cartList.length ?
+                                    contextData.cartItems.length ?
 
-                                        contextData.cartList.map((product, index: number) => {
+                                        contextData.cartItems.map((cartItem, index: number) => {
                                             return (
                                                 <div>
-                                                    <h3>{product.title}</h3>
+                                                    <h3>{cartItem.product.title}</h3>
                                                     <p>Antal: [här quantity]</p>
-                                                    <p>{product.price} SEK</p>
+                                                    <p>{cartItem.product.price} SEK</p>
                                              
                                                    
                                                 </div>
