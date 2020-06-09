@@ -21,16 +21,16 @@ function CartView(props: Props) {
                     <div style={cartContainer}>
                         <h1 style={cartTitle}>Cart</h1>
                         {
-                            contextData.cartList.length ?
+                            contextData.cartItems.length ?
 
-                                contextData.cartList.map((product, index: number) => {
+                                contextData.cartItems.map((cartItem, index: number) => {
                                     return (
-                                        <div style={singleCartItem}>
-                                            <h3 style={childrenFlex}>{product.title}</h3>
-                                            <img src={require("./../assets/" + product.img)} alt="pic" style={{ ...posterInCart, ...childrenFlex }} />
-                                            <h3>{product.price} SEK</h3>
-                                            <Button style={childrenFlex} onClick={() => contextData.deletefromcart(product, index)}>Delete from cart</Button>
-                                            <h3 style={childrenFlex}>Antal (Add more)</h3>
+                                        <div key={cartItem.product.id} style={singleCartItem}>
+                                            <h3 style={childrenFlex}>{cartItem.product.title}</h3>
+                                            <img src={require("./../assets/" + cartItem.product.img)} alt="pic" style={{ ...posterInCart, ...childrenFlex }} />
+                                            <h3>{cartItem.product.price} SEK</h3>
+                                            <Button style={childrenFlex} onClick={() => contextData.deletefromcart(cartItem.product, index)}>Delete from cart</Button>
+                                            <h3 style={childrenFlex}>Antal{cartItem.quantity}</h3>
                                         </div>
                                     )
                                 })
