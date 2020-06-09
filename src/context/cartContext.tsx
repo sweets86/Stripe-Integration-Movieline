@@ -59,8 +59,20 @@ export class CartProvider extends Component<{}, ProviderState> {
     }
 
     deletefromcart = (product: Product, index: number) => {
-        const clonedCart = Object.assign([], this.state.cartItems)
-        clonedCart.splice(index, 1)
+        const clonedCart: CartItem[] = Object.assign([], this.state.cartItems)
+        
+        const foundProdIndex: number = this.state.cartItems.findIndex((productToFind) => {
+            return product.id === productToFind.product.id
+        })
+        console.log(foundProdIndex)
+
+        if (foundProdIndex === -1 || clonedCart[foundProdIndex].quantity <= 1) {
+            clonedCart.splice(index, 1,{product: product, quantity: -1})
+            clonedCart.splice(index, 1)
+        }else {
+            clonedCart[foundProdIndex].quantity--
+        }
+
         this.setState({ cartItems: clonedCart }, () => { console.log(this.state) })
     }
 
