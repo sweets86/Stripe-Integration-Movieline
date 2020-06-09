@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { CartConsumer, ContextState } from '../context/cartContext'
-import { Button } from '@blueprintjs/core'
+import { Button, Spinner } from '@blueprintjs/core'
 
 interface Params {
     cart: string
@@ -28,21 +28,28 @@ function CartView(props: Props) {
                                     setPrice(totalPrice);
                                     return (
                                         <div key={cartItem.product.id} style={singleCartItem}>
+                                            <h3 style={childrenFlex}>Quantity: <br/> x {cartItem.quantity}</h3>
                                             <h3 style={childrenFlex}>{cartItem.product.title}</h3>
-                                            <img src={require("./../assets/" + cartItem.product.img)} alt="pic" style={{ ...posterInCart, ...childrenFlex }} />
-                                            <h3>{cartItem.product.price} SEK</h3>
-                                            <Button style={childrenFlex} onClick={() => contextData.deletefromcart(cartItem.product, index)}>Delete from cart</Button>
-                                            <h3 style={childrenFlex}>Antal{cartItem.quantity}</h3>
+                                            <img src={require("./../assets/" + cartItem.product.img)} alt="pic" style={childrenFlex} />
+                                            <h3 style={childrenFlex}>Price for single item: {cartItem.product.price} SEK</h3>
+                                            <div style={childrenFlex}>
+                                             <Button style={deleteButton} className="bp3-intent-danger" onClick={() => contextData.deletefromcart(cartItem.product, index)}>Delete from cart</Button>
+                                            </div>
                                         </div>
                                     )
                                 })
                                 :
-                                <h4>No items in cart...</h4>
+                                (<div style={{textAlign: 'center'}}>
+                                    <h4>No items in cart...</h4>
+                                    <img src="https://shop.myfelt.com/skin/frontend/rwd/myfelt-2018/images/cart-noitem-mobile.gif" alt="empty-cart-gif"/>
+                                </div>)
                         }
-                        <h3>{"Total Price is " + price}</h3>
+                        <h1 style={{textAlign: 'center', borderBottom: 'grey solid 1px'}}>{"Your current saldo: " + price} SEK</h1>
+                        <div style={{textAlign: 'center'}}>Check your order. If everything is right than proceed to >> 
                         <Link to='/checkout/'>
-                            <h1>Go To checkout</h1>
+                            <Button className="bp3-minimal"><b>CHECKOUT</b></Button>
                         </Link>
+                        </div>
                     </div>
                 )
             }}
@@ -59,24 +66,27 @@ const cartTitle: React.CSSProperties = {
 const cartContainer: React.CSSProperties = {
     width: '100%',
     height: 'auto',
-
-
 }
 
 const singleCartItem: React.CSSProperties = {
     width: '100%',
     height: '20%',
     display: 'flex',
-    border: 'grey solid 1px',
+    borderTop: 'grey solid 1px',
     flexWrap: 'wrap'
 }
 
-const posterInCart: React.CSSProperties = {
-    order: 'initial'
-}
 
 const childrenFlex: React.CSSProperties = {
     padding: '2%',
     margin: '2%',
-    width: '200px'
+    width: '200px',
+    borderLeft: 'grey solid 1px'
+}
+
+const deleteButton: React.CSSProperties = {
+    padding: '2%',
+    width: '120px',
+    height: '60px',
+    alignItems: 'center'
 }

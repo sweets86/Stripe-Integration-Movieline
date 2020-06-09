@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import ReactDOM from 'react-dom'
 import { render } from "@testing-library/react";
-import { Alert, FormGroup } from "@blueprintjs/core";
+import { Alert, FormGroup, Label, InputGroup } from "@blueprintjs/core";
 
 type FormData = {
   firstName: string;
@@ -12,9 +12,12 @@ type FormData = {
 };
 
 const success = () => {
+    const form = document.getElementById('infos-form')
     render(
-        <div>
-            Your data has been received!
+        <div style={{textAlign: 'center'}}>
+            <h2>Message from the team:</h2>
+            <p>We received your info, thank you!</p> 
+            <p style={{color: 'red'}}>Till min grupp: Detta behöver vi fixa, det ska inte vara här :D</p>
         </div>
     )
 } 
@@ -27,15 +30,15 @@ export default function InfoForm() {
 
   return (
     <form id="infos-form" onSubmit={onSubmit}>
-      <label>First Name</label>
-      <input name="firstName" ref={register} /> <br/>
-      <label>Last Name</label>
-      <input name="lastName" ref={register} /> <br/>
-      <label>Phone</label>
-      <input name="phone" ref={register} /> <br/>
-      <label>Adress</label>
-      <input name="adress" ref={register} /> <br/>
-      <button
+      <Label className="bp3-fill">First Name:</Label>
+      <InputGroup className="bp3-fill" name="firstName" ref={register} /> <br/>
+      <Label className="bp3-fill">Last Name:</Label>
+      <InputGroup className="bp3-fill" name="lastName" ref={register} /> <br/>
+      <Label className="bp3-fill">Phone number:</Label>
+      <InputGroup className="bp3-fill" name="phone" ref={register} /> <br/>
+      <Label className="bp3-fill">Address:</Label>
+      <InputGroup className="bp3-fill" name="address" ref={register} /> <br/>
+      <button style={buttonStyle}
         type="button"
         onClick={() => {
           setValue("lastName", ""); 
@@ -49,4 +52,11 @@ export default function InfoForm() {
       </button>
     </form>
   );
+}
+
+const buttonStyle: React.CSSProperties = {
+    width: '100%',
+    border: '1px, grey'
+
+    
 }

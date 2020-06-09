@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import DetailCheckoutView from './DetailCheckoutView'
 import { Button, Card, Label, MenuItem, Menu, FormGroup, InputGroup, RadioGroup, Radio, Checkbox} from "@blueprintjs/core"
@@ -18,18 +18,23 @@ export default class CheckoutView extends React.Component<Props> {
         super(props)
     
         const checkout = props.match.params.checkout
-
+        this.state = {
+            setPrice: ""
+        }
     }
-   
+    
 
     render() {
         return (
             <div style={checkoutStyle} className="pt-card pt-elevation-0">
 
                 <div style={cardStyle}>
-                <h2>The Cart </h2>    
+                <h2>Summary of your order:</h2>    
                 <CartConsumer>
                     {(contextData: ContextState) => {
+                        let totalPrice = 0;
+                        let pricePerItem = 0;
+                        
                         return (
                             <div>
                                
@@ -37,20 +42,23 @@ export default class CheckoutView extends React.Component<Props> {
                                     contextData.cartItems.length ?
 
                                         contextData.cartItems.map((cartItem, index: number) => {
+                                        totalPrice = totalPrice + cartItem.product.price * cartItem.quantity;
+                                        pricePerItem = cartItem.product.price * cartItem.quantity;
+                                        
                                             return (
-                                                <div>
+                                                <div style={summary}>
                                                     <h3>{cartItem.product.title}</h3>
-                                                    <p>Antal: [här quantity]</p>
-                                                    <p>{cartItem.product.price} SEK</p>
+                                                    <p>Antal: x{cartItem.quantity}</p>
+                                                    <p>{pricePerItem} SEK</p>
                                              
                                                    
                                                 </div>
                                             )
                                         })
                                         : 
-                                        <h4>No items in cart...</h4>
+                                        <p>No items in cart...</p>
                                 }
-                                <h3>Total Pris [Här funktionen med total pris]</h3>
+                                <h3 style={{textAlign: 'center', padding: '10px', backgroundColor: '#212121', color: 'white'}}>Total: {totalPrice} SEK</h3>
                             </div>
                         )
                     }}
@@ -113,4 +121,9 @@ export const cardStyle: React.CSSProperties = {
     margin:"0.2px",
     padding:'8px',
     border: '1px solid #487cc5'
+}
+
+const summary: React.CSSProperties = {
+    textAlign: 'center'
+
 }
