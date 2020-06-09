@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { CartConsumer, ContextState } from '../context/cartContext'
@@ -13,17 +13,19 @@ interface Props extends RouteComponentProps<Params> { }
 // Kundvagnsida- Cartpage
 function CartView(props: Props) {
     const cart = props.match.params.cart
-
+    const [price, setPrice] = useState(0);
     return (
         <CartConsumer>
             {(contextData: ContextState) => {
+                let totalPrice = 0;
                 return (
                     <div style={cartContainer}>
                         <h1 style={cartTitle}>Cart</h1>
                         {
                             contextData.cartItems.length ?
-
                                 contextData.cartItems.map((cartItem, index: number) => {
+                                    totalPrice = totalPrice + cartItem.product.price * cartItem.quantity;
+                                    setPrice(totalPrice);
                                     return (
                                         <div key={cartItem.product.id} style={singleCartItem}>
                                             <h3 style={childrenFlex}>{cartItem.product.title}</h3>
@@ -37,7 +39,7 @@ function CartView(props: Props) {
                                 :
                                 <h4>No items in cart...</h4>
                         }
-                        <h3>Total Pris</h3>
+                        <h3>{"Total Price is " + price}</h3>
                         <Link to='/checkout/'>
                             <h1>Go To checkout</h1>
                         </Link>
