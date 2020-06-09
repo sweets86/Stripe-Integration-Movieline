@@ -1,5 +1,5 @@
 import React, { createContext, Component } from 'react'
-import { Product, products } from '../products'
+import { Product } from '../products'
 
 
 interface CartItem {
@@ -14,6 +14,7 @@ export interface ProviderState {
 export interface ContextState extends ProviderState {
     addProductToCart: (product: Product) => void
     deletefromcart: (product: Product, index: number) => void
+    countProductsInCart: () => void
 }
 
 export const CartContext = createContext<ContextState>({
@@ -25,6 +26,9 @@ export const CartContext = createContext<ContextState>({
     deletefromcart: (product: Product) => {
         console.log(("Something went wrong while deleting " + product.title + "to cart")
         )
+    },
+    countProductsInCart: () => {
+        console.log("An error occured while trying to count the number of the products, check your log")
     }
 })
 
@@ -60,12 +64,24 @@ export class CartProvider extends Component<{}, ProviderState> {
         this.setState({ cartItems: clonedCart }, () => { console.log(this.state) })
     }
 
+    countProductsInCart = () => {
+        let totalQuantityToShow: number = 0
+        this.state.cartItems.map((cartItemObject) => {
+            return (
+                (
+                    totalQuantityToShow += cartItemObject.quantity
+                ))
+        })
+        return totalQuantityToShow
+    }
+
     render() {
         return (
             <CartContext.Provider value={{
                 ...this.state,
                 addProductToCart: this.addProductToCart,
                 deletefromcart: this.deletefromcart,
+                countProductsInCart: this.countProductsInCart
             }}>
                 {this.props.children}
             </CartContext.Provider>

@@ -20,14 +20,16 @@ export default function viewNavBar() {
                     <Link to='/cart/'>
                         <Button className="bp3-button bp3-minimal bp3-icon-shopping-cart" style={cartChildren} />
                         <CartConsumer>
-                            {(contextData: ContextState) => { return (<span style={cartChildren}>{contextData.cartItems.length}</span>) }}
+                            {(contextData: ContextState) => {
+                                return (
+                                    < span style={cartChildren} > {contextData.countProductsInCart()}</span>)
+                            }}
                         </CartConsumer>
-
                     </Link>
 
                 </Navbar.Group>
             </Navbar>}
-        </div>
+        </div >
     )
 };
 
