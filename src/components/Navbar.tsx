@@ -15,8 +15,6 @@ export default function viewNavBar() {
                 </Navbar.Group>
 
                 <Navbar.Group align={Alignment.RIGHT} style={cartContainer}>
-
-
                     <Link to='/cart/'>
                         <Button className="bp3-button bp3-minimal bp3-icon-shopping-cart" style={cartChildren} />
                         <CartConsumer>
@@ -26,8 +24,8 @@ export default function viewNavBar() {
                             }}
                         </CartConsumer>
                     </Link>
-
                 </Navbar.Group>
+
             </Navbar>}
         </div >
     )

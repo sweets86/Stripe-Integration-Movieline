@@ -18,9 +18,9 @@ export default class CheckoutView extends React.Component<Props> {
         super(props)
     
         const checkout = props.match.params.checkout
-        this.state = {
+        /* this.state = {
             setPrice: ""
-        }
+        } */
     }
     
 
@@ -46,12 +46,10 @@ export default class CheckoutView extends React.Component<Props> {
                                         pricePerItem = cartItem.product.price * cartItem.quantity;
                                         
                                             return (
-                                                <div style={summary}>
+                                                <div style={summary} key={cartItem.product.id}>
                                                     <h3>{cartItem.product.title}</h3>
                                                     <p>Antal: x{cartItem.quantity}</p>
                                                     <p>{pricePerItem} SEK</p>
-                                             
-                                                   
                                                 </div>
                                             )
                                         })

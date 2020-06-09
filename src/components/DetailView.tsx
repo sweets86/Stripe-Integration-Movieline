@@ -6,19 +6,16 @@ import { Button } from '@blueprintjs/core'
 import { productsContainer, productCards, poster, TitleLink } from '../css'
 import { CartConsumer, ContextState } from '../context/cartContext'
 
-
 interface Params {
     id: string
 }
 
-interface Props extends RouteComponentProps<Params> {}
+interface Props extends RouteComponentProps<Params> { }
 
 const productList: Product[] = products
 
-
 function DetailView(props: Props) {
     const id = props.match.params.id
-
     const numberId = parseFloat(id)
 
     return (
@@ -32,12 +29,12 @@ function DetailView(props: Props) {
                             <img src={require("./../assets/" + product.img)} style={poster} className='movieImg' />
                             <h3>Köp: {product.price} SEK</h3>
                             <CartConsumer>
-                            {(contextData: ContextState) => {
-                                return (
-                                    <Button onClick={() => contextData.addProductToCart(product)}>Add to cart</Button>
-                                )
-                            }}
-                        </CartConsumer>
+                                {(contextData: ContextState) => {
+                                    return (
+                                        <Button onClick={() => contextData.addProductToCart(product)}>Add to cart</Button>
+                                    )
+                                }}
+                            </CartConsumer>
                         </div>
                     )
             })}

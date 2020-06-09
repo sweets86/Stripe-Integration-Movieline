@@ -1,7 +1,6 @@
 import React, { createContext, Component } from 'react'
 import { Product } from '../products'
 
-
 interface CartItem {
     product: Product,
     quantity: number
