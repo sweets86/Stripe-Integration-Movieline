@@ -1,7 +1,10 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import DetailCheckoutView from './DetailCheckoutView'
-import { Button, Card, Label, MenuItem, Menu, FormGroup, InputGroup,} from "@blueprintjs/core"
+import { Button, Card, Label, MenuItem, Menu, FormGroup, InputGroup, RadioGroup, Radio, Checkbox} from "@blueprintjs/core"
+import { CartConsumer, ContextState } from '../context/cartContext'
+import InfoForm from './checkout-components/FormInfo'
+
 
 interface Params {
     checkout: string
@@ -25,29 +28,54 @@ export default class CheckoutView extends React.Component<Props> {
 
                 <div style={cardStyle}>
                 <h2>The Cart </h2>    
-                
+                <CartConsumer>
+                    {(contextData: ContextState) => {
+                        return (
+                            <div>
+                               
+                                {
+                                    contextData.cartList.length ?
+
+                                        contextData.cartList.map((product, index: number) => {
+                                            return (
+                                                <div>
+                                                    <h3>{product.title}</h3>
+                                                    <p>Antal: [här quantity]</p>
+                                                    <p>{product.price} SEK</p>
+                                             
+                                                   
+                                                </div>
+                                            )
+                                        })
+                                        : 
+                                        <h4>No items in cart...</h4>
+                                }
+                                <h3>Total Pris [Här funktionen med total pris]</h3>
+                            </div>
+                        )
+                    }}
+        </CartConsumer> 
+
                 </div>
+
+
+
 
                 <div style={cardStyle}>
                 <h2>Your Info</h2>
-                    <FormGroup>
-                        <Label htmlFor="input-b">Enter Name</Label>
-                        <InputGroup id="text-input" placeholder="Enter name" />
-                        <br/>
-                        <Label htmlFor="input-b">Enter Email</Label>
-                        <InputGroup id="text-input" placeholder="Enter email" />
-                        <br/>
-                        <Label htmlFor="input-b">Enter Telephone</Label>
-                        <InputGroup id="text-input" placeholder="Enter telephone" />
-                        <br/>
-                        <Label htmlFor="input-b">Enter Address</Label>
-                        <InputGroup id="text-input" placeholder="Enter Address" />
-                    </FormGroup>
+                  <InfoForm></InfoForm>
                 </div>
 
                 <div style={cardStyle}>
                 <h2>Delivery</h2>
-    
+               
+                
+                
+                    <Radio label="PostNord" value="one" defaultChecked={true}/>
+                    <Radio label="DHL" value="two" />
+                    <Radio label="Express" value="three" />
+            
+              
                 </div>
 
                 <div style={cardStyle}>
@@ -78,7 +106,7 @@ const checkoutStyle: React.CSSProperties = {
 }
 
 
-const cardStyle: React.CSSProperties = {
+export const cardStyle: React.CSSProperties = {
     maxWidth:"60%",
     minWidth:"300px",
     flex:"1",
