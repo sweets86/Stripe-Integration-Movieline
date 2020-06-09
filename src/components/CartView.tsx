@@ -17,15 +17,15 @@ function CartView(props: Props) {
     return (
         <CartConsumer>
             {(contextData: ContextState) => {
-                let p = 0;
+                let totalPrice = 0;
                 return (
                     <div style={cartContainer}>
                         <h1 style={cartTitle}>Cart</h1>
                         {
                             contextData.cartItems.length ?
                                 contextData.cartItems.map((cartItem, index: number) => {
-                                    p = p + cartItem.product.price * cartItem.quantity;
-                                    setPrice(p);
+                                    totalPrice = totalPrice + cartItem.product.price * cartItem.quantity;
+                                    setPrice(totalPrice);
                                     return (
                                         <div key={cartItem.product.id} style={singleCartItem}>
                                             <h3 style={childrenFlex}>{cartItem.product.title}</h3>
