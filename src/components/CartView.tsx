@@ -35,16 +35,19 @@ function CartView(props: Props) {
                                             <div style={childrenFlex}>
                                              <Button style={deleteButton} className="bp3-intent-danger" onClick={() => contextData.deletefromcart(cartItem.product, index)}>Delete from cart</Button>
                                             </div>
+                                            
                                         </div>
-                                    )
-                                })
+                                    ) 
+                                } 
+                                ) 
                                 :
                                 (<div style={{textAlign: 'center'}}>
                                     <h4>No items in cart...</h4>
                                     <img src="https://shop.myfelt.com/skin/frontend/rwd/myfelt-2018/images/cart-noitem-mobile.gif" alt="empty-cart-gif"/>
+
                                 </div>)
                         }
-                        <h1 style={{textAlign: 'center', borderBottom: 'grey solid 1px'}}>{"Your current saldo: " + price} SEK</h1>
+                        <h1 style={{textAlign: 'center', borderBottom: 'grey solid 1px'}}>{contextData.cartItems.length ? "Your current saldo: " + price : "Your current saldo: 0"} SEK</h1> 
                         <div style={{textAlign: 'center'}}>Check your order. If everything is right than proceed to >> 
                         <Link to='/checkout/'>
                             <Button className="bp3-minimal"><b>CHECKOUT</b></Button>
