@@ -16,7 +16,6 @@ interface State {
 
 
 const productList: Product[] = products
-console.log(productList)
 
 // Startsida- Startpage
 export default class MasterView extends React.Component {
