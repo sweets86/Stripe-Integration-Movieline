@@ -11,15 +11,19 @@ type FormData = {
   adress: string;
 };
 
-const success = () => {
-  const form = document.getElementById('infos-form')
-  render(
+
+const okMessage = 
+  (
     <div style={{ textAlign: 'center' }}>
-      <h2>Message from the team:</h2>
-      <p>We received your info, thank you!</p>
-      <p style={{ color: 'red' }}>Till min grupp: Detta behöver vi fixa, det ska inte vara här :D</p>
-    </div>
+    <h2>Message from the team:</h2>
+    <p>We received your info, thank you!</p>
+  </div>
   )
+
+
+const success = () => {
+  const form = document.getElementById('message')
+  ReactDOM.render(okMessage, form);
 }
 
 export default function InfoForm() {
@@ -49,9 +53,12 @@ export default function InfoForm() {
       >
         Save
       </button>
+      <div id="message"></div>
     </form>
   );
 }
+
+
 
 const buttonStyle: React.CSSProperties = {
   width: '100%',
