@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import DetailCheckoutView from './DetailCheckoutView'
+// import DetailCheckoutView from './DetailCheckoutView'
 import { Button, Card, Label, MenuItem, Menu, FormGroup, InputGroup, RadioGroup, Radio, Checkbox} from "@blueprintjs/core"
 import { CartConsumer, ContextState } from '../context/cartContext'
 import InfoForm from './checkout-components/FormInfo'
@@ -97,7 +97,7 @@ export default class CheckoutView extends React.Component<Props> {
                 <br/>
                 <Button>Order confirmation</Button>
                 </div>       
-                <DetailCheckoutView />
+                
             </div>
         )
     }

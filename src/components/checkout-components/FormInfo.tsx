@@ -1,8 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import ReactDOM from 'react-dom'
-import { render } from "@testing-library/react";
-import { Alert, FormGroup, Label, InputGroup } from "@blueprintjs/core";
+import { Label, InputGroup } from "@blueprintjs/core";
+// import { RadioBox } from 'react-inputs-validation'
+
 
 type FormData = {
   firstName: string;
@@ -28,11 +29,15 @@ const success = () => {
 
 export default function InfoForm() {
   const { register, setValue, handleSubmit, errors } = useForm<FormData>();
-  const onSubmit = handleSubmit(({ firstName, lastName, phone, adress }) => {
-  });
+   const onSubmit = handleSubmit(({ firstName, lastName, phone, adress }) => {   
+     
+    //   VALIDERING HÄR??
+  
+  }
+  );
 
   return (
-    <form id="infos-form" onSubmit={onSubmit}>
+    <form id="infos-form" onSubmit={onSubmit} autoComplete="on">
       <Label className="bp3-fill">First Name:</Label>
       <InputGroup className="bp3-fill" name="firstName" ref={register} /> <br />
       <Label className="bp3-fill">Last Name:</Label>
@@ -48,7 +53,7 @@ export default function InfoForm() {
           setValue("firstName", "");
           setValue("phone", 0);
           setValue("adress", "");
-          success()
+          success();
         }}
       >
         Save
