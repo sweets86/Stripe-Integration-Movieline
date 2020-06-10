@@ -10,9 +10,10 @@ interface Params {
 
 interface Props extends RouteComponentProps<Params> { }
 
+// Kundvagnsida- Cartpage
 function CartView(props: Props) {
     const cart = props.match.params.cart
-    /* const [price, setPrice] = useState(0); */
+   // const [price, setPrice] = useState(0);
     return (
         <CartConsumer>
             {(contextData: ContextState) => {
@@ -24,7 +25,6 @@ function CartView(props: Props) {
                             contextData.cartItems.length ?
                                 contextData.cartItems.map((cartItem, index: number) => {
                                     totalPrice = totalPrice + cartItem.product.price * cartItem.quantity;
-                                    /* setPrice(totalPrice); */
                                     return (
                                         <div key={cartItem.product.id} style={singleCartItem}>
                                             <h3 style={childrenFlex}>Quantity: <br/> x {cartItem.quantity}</h3>
