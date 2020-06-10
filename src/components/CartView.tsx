@@ -13,7 +13,7 @@ interface Props extends RouteComponentProps<Params> { }
 // Kundvagnsida- Cartpage
 function CartView(props: Props) {
     const cart = props.match.params.cart
-    const [price, setPrice] = useState(0);
+   // const [price, setPrice] = useState(0);
     return (
         <CartConsumer>
             {(contextData: ContextState) => {
@@ -25,7 +25,6 @@ function CartView(props: Props) {
                             contextData.cartItems.length ?
                                 contextData.cartItems.map((cartItem, index: number) => {
                                     totalPrice = totalPrice + cartItem.product.price * cartItem.quantity;
-                                    setPrice(totalPrice);
                                     return (
                                         <div key={cartItem.product.id} style={singleCartItem}>
                                             <h3 style={childrenFlex}>Quantity: <br/> x {cartItem.quantity}</h3>
@@ -47,7 +46,7 @@ function CartView(props: Props) {
 
                                 </div>)
                         }
-                        <h1 style={{textAlign: 'center', borderBottom: 'grey solid 1px'}}>{contextData.cartItems.length ? "Your current saldo: " + price : "Your current saldo: 0"} SEK</h1> 
+                        <h1 style={{textAlign: 'center', borderBottom: 'grey solid 1px'}}>{contextData.cartItems.length ? "Your current saldo: " + totalPrice : "Your current saldo: 0"} SEK</h1> 
                         <div style={{textAlign: 'center'}}>Check your order. If everything is right than proceed to >> 
                         <Link to='/checkout/'>
                             <Button className="bp3-minimal"><b>CHECKOUT</b></Button>
