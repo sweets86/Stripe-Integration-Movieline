@@ -9,7 +9,7 @@ const validEmailRegex = RegExp(
 );
 
 const validMobileRegex = RegExp(
-    /^(\([0-9]{3}\)\s*|[0-9]{3}\-)[0-9]{3}-[0-9]{4}$/
+    /^(\+\d{1,3}[- ]?)?\d{10}$/
 );
 
 const validateForm = (errors: any) => {
@@ -23,7 +23,7 @@ interface State {
     mobilePhone: number;
     errors: {
         email: string,
-        mobilePhone: number
+        mobilePhone: any
     }
 };
 
@@ -39,10 +39,9 @@ export default class PaypalForm extends React.Component<Props, State> {
             mobilePhone: parseInt(""),
             errors: {
                 email: "",
-                mobilePhone: parseInt("")
+                mobilePhone: ""
             }
         }
-        this.handleChange = this.handleChange.bind(this)
     }
 
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,8 +59,8 @@ export default class PaypalForm extends React.Component<Props, State> {
             case 'mobilePhone':
                 errors.mobilePhone =
                 validMobileRegex.test(value)
-                        ? parseInt('No number')
-                        : parseInt('');
+                        ? ''
+                        : 'Number is not valid'
                 break;
             default:
                 break;
@@ -74,7 +73,7 @@ export default class PaypalForm extends React.Component<Props, State> {
 
     handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (validateForm(this.state.errors) && this.state.email != "" ) {
+        if (validateForm(this.state.errors) && this.state.email != ""  && this.state.mobilePhone != parseInt("") ) {
             console.log(validateForm(this.state.errors))
             console.info('Valid Form')
             alert('You are valid! Check your mailbox.')
@@ -95,7 +94,7 @@ export default class PaypalForm extends React.Component<Props, State> {
                     </label>
                     <label htmlFor="mobilePhone">Mobile:
                     <input name="mobilePhone" type="mobilePhone" onChange={this.handleChange} formNoValidate placeholder="+46 mobilnummer" autoComplete="on" /* pattern="[0-9.]+" */ />
-                        {errors.mobilePhone > 0 &&
+                        {errors.mobilePhone.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.mobilePhone}</span>}
                     </label>
                     <Button type="submit" value="submit"  formNoValidate style={buttonStyle}>Submit</Button>
