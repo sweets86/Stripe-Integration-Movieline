@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 // import DetailCheckoutView from './DetailCheckoutView'
-import { Button, Card, Label, MenuItem, Menu, FormGroup, InputGroup, RadioGroup, Radio, Checkbox} from "@blueprintjs/core"
+import { Button, Card, Label, MenuItem, Menu, FormGroup, InputGroup, RadioGroup, Checkbox} from "@blueprintjs/core"
 import { CartConsumer, ContextState } from '../context/cartContext'
 import InfoForm from './checkout-components/FormInfo'
+import Delivery from './checkout-components/Delivery'
 import { BUTTON } from '@blueprintjs/core/lib/esm/common/classes'
 
 
@@ -80,14 +81,7 @@ export default class CheckoutView extends React.Component<Props> {
 
                 <div style={cardStyle}>
                 <h2>Delivery</h2>
-               
-                
-                
-                    <Radio label="PostNord" value="one" defaultChecked={true}/>
-                    <Radio label="DHL" value="two" />
-                    <Radio label="Express" value="three" />
-            
-              
+                    <Delivery></Delivery>
                 </div>
 
                 <div style={cardStyle}>
