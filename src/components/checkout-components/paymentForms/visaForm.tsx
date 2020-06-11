@@ -65,25 +65,25 @@ export default class VisaForm extends React.Component<Props, State> {
         switch (name) {
             case 'cardNumber':
                 errors.cardNumber =
-                validcardNumberRegex.test(value)
+                    validcardNumberRegex.test(value)
                         ? ''
                         : 'Card is not valid';
                 break;
             case 'month':
                 errors.month =
-                validMonthRegex.test(value)
+                    validMonthRegex.test(value)
                         ? ''
                         : 'Month is not valid'
                 break;
             case 'year':
                 errors.year =
-                validYearRegex.test(value)
+                    validYearRegex.test(value)
                         ? ''
                         : 'Year is not valid'
                 break;
             case 'cvv':
                 errors.cvv =
-                validCVCRegex.test(value)
+                    validCVCRegex.test(value)
                         ? ''
                         : 'CVV is not valid'
                 break;
@@ -98,7 +98,7 @@ export default class VisaForm extends React.Component<Props, State> {
 
     handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (validateForm(this.state.errors) && this.state.cardNumber != parseInt("") && this.state.month != parseInt("") && this.state.year != parseInt("") && this.state.cvv != parseInt("")) {
+        if (validateForm(this.state.errors) && this.state.cardNumber && this.state.month && this.state.year && this.state.cvv) {
             console.log(validateForm(this.state.errors))
             console.info('Valid Form')
             alert('You are valid! Open your BankID application.')
@@ -111,28 +111,28 @@ export default class VisaForm extends React.Component<Props, State> {
         const { errors } = this.state
         return (
             <div>
-                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} noValidate>
+                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} /* noValidate */>
                     <label htmlFor="cardNumber">cardNumber:
-                        <input name="cardNumber" type="cardNumber" onChange={this.handleChange} formNoValidate placeholder=" your cardnumber" autoComplete="on" />
+                        <input name="cardNumber" type="cardNumber" onChange={this.handleChange} /* formNoValidate */ placeholder=" your cardnumber" autoComplete="on" />
                         {errors.cardNumber.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.cardNumber}</span>}
                     </label>
                     <label htmlFor="month">Month:
-                        <input name="month" type="month" onChange={this.handleChange} formNoValidate placeholder="month" autoComplete="on" />
+                        <input name="month" type="text" onChange={this.handleChange} /* formNoValidate */ placeholder="01" autoComplete="on" />
                         {errors.month.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.month}</span>}
                     </label>
                     <label htmlFor="year">Year:
-                        <input name="year" type="year" onChange={this.handleChange} formNoValidate placeholder="year" autoComplete="on" />
+                        <input name="year" type="year" onChange={this.handleChange} /* formNoValidate */ placeholder="20" autoComplete="on" />
                         {errors.year.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.year}</span>}
                     </label>
                     <label htmlFor="cvv">CVV:
-                        <input name="cvv" type="cvv" onChange={this.handleChange} formNoValidate placeholder="cvv" autoComplete="on" />
+                        <input name="cvv" type="cvv" onChange={this.handleChange} /* formNoValidate */ placeholder="cvv" autoComplete="on" />
                         {errors.cvv.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.cvv}</span>}
                     </label>
-                    <Button type="submit" value="submit" formNoValidate style={buttonStyle}>Submit</Button>
+                    <Button type="submit" value="submit" /* formNoValidate */ style={buttonStyle}>Submit</Button>
                 </form>
 
                 <img style={{ maxWidth: '75%' }}

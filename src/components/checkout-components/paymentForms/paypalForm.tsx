@@ -73,7 +73,7 @@ export default class PaypalForm extends React.Component<Props, State> {
 
     handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (validateForm(this.state.errors) && this.state.email != ""  && this.state.mobilePhone != parseInt("") ) {
+        if (validateForm(this.state.errors) && this.state.email != "" && this.state.mobilePhone ) {
             console.log(validateForm(this.state.errors))
             console.info('Valid Form')
             alert('You are valid! Check your mailbox.')
@@ -86,18 +86,18 @@ export default class PaypalForm extends React.Component<Props, State> {
         const { errors } = this.state
         return (
             <div>
-                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} noValidate >
+                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} /* noValidate */ >
                     <label htmlFor='email'>Email:
-                    <input name="email" type="email" onChange={this.handleChange} value={this.state.email} formNoValidate placeholder="you@example.com" autoComplete="on" /* pattern="[A-Za-z]{3}" */ />
+                    <input name="email" type="email" onChange={this.handleChange} value={this.state.email} /* formNoValidate */ placeholder="you@example.com" autoComplete="on" />
                         {errors.email.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.email}</span>}
                     </label>
                     <label htmlFor="mobilePhone">Mobile:
-                    <input name="mobilePhone" type="mobilePhone" onChange={this.handleChange} formNoValidate placeholder="+46 mobilnummer" autoComplete="on" /* pattern="[0-9.]+" */ />
+                    <input name="mobilePhone" type="mobilePhone" onChange={this.handleChange} /* formNoValidate */ placeholder="mobilnummer" autoComplete="on" />
                         {errors.mobilePhone.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.mobilePhone}</span>}
                     </label>
-                    <Button type="submit" value="submit"  formNoValidate style={buttonStyle}>Submit</Button>
+                    <Button type="submit" value="submit" /* formNoValidate */ style={buttonStyle}>Submit</Button>
                 </form>
                 <a href="https://www.paypal.com/se/signin"><img style={{ maxWidth: '50%' }}
                     src={require("./paypal.png")} alt="Paypal" /></a>

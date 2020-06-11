@@ -51,7 +51,7 @@ export default class SwishForm extends React.Component<Props, State> {
 
     handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (validateForm(this.state.errors) && this.state.mobilePhone != parseInt("")) {
+        if (validateForm(this.state.errors) && this.state.mobilePhone ) {
             console.log(validateForm(this.state.errors))
             console.info('Valid Form')
             alert('You are valid! Open your BankID application.')
@@ -59,18 +59,18 @@ export default class SwishForm extends React.Component<Props, State> {
             console.error('Invalid Form')
         }
     }
-    
+
     render() {
         const { errors } = this.state
         return (
             <div>
-                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} noValidate>
+                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} /* noValidate */>
                     <label htmlFor="mobilePhone">Mobile:
-                        <input name="mobilePhone" type="mobilePhone" onChange={this.handleChange} /* value={this.state.mobilePhone} */ formNoValidate placeholder="+46 mobilnummer" autoComplete="on" /* pattern='text' required={true} */ />
+                        <input name="mobilePhone" type="mobilePhone" onChange={this.handleChange} /* formNoValidate */ placeholder="mobilnummer" autoComplete="on" />
                         {errors.mobilePhone.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.mobilePhone}</span>}
                     </label>
-                    <Button type="submit" value="submit" formNoValidate style={buttonStyle}>Submit</Button>
+                    <Button type="submit" value="submit" /* formNoValidate */ style={buttonStyle}>Submit</Button>
                 </form>
 
                 <img style={{ maxWidth: '75%' }}
