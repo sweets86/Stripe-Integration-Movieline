@@ -2,34 +2,106 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { useForm } from "react-hook-form";
 import { Alert, FormGroup, Label, InputGroup, Button } from "@blueprintjs/core";
+import { isNumber } from 'util';
+
+const validEmailRegex = RegExp(
+    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+);
+
+const validMobileRegex = RegExp(
+    /^(\([0-9]{3}\)\s*|[0-9]{3}\-)[0-9]{3}-[0-9]{4}$/
+);
+
+const validateForm = (errors: any) => {
+    let valid = true
+    Object.values(errors).map((value: any) => value.length > 0 && (valid = false))
+    return valid
+}
+
+interface State {
+    email: string
+    mobilePhone: number;
+    errors: {
+        email: string,
+        mobilePhone: number
+    }
+};
 
 interface Props {
     form: (form: any) => void
 }
 
-export default class PaypalForm extends React.Component<Props> {
+export default class PaypalForm extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
+        this.state = {
+            email: "",
+            mobilePhone: parseInt(""),
+            errors: {
+                email: "",
+                mobilePhone: parseInt("")
+            }
+        }
+        this.handleChange = this.handleChange.bind(this)
     }
-    
-    handleSubmit = () => {
-        const {handleSubmit, register, errors} = useForm()
-        const onSubmit = values => console.log(values)
+
+    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+        let errors = this.state.errors
+
+        switch (name) {
+            case 'email':
+                errors.email =
+                    validEmailRegex.test(value)
+                        ? ''
+                        : 'Email is not valid';
+                break;
+            case 'mobilePhone':
+                errors.mobilePhone =
+                validMobileRegex.test(value)
+                        ? parseInt('No number')
+                        : parseInt('');
+                break;
+            default:
+                break;
+        }
+        this.setState((prevState) => ({
+            ...prevState,
+            errors, [name]: value
+        }))
     }
+
+    handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (validateForm(this.state.errors) && this.state.email != "" ) {
+            console.log(validateForm(this.state.errors))
+            console.info('Valid Form')
+            alert('You are valid! Check your mailbox.')
+        } else {
+            console.error('Invalid Form')
+        }
+    }
+
     render() {
+        const { errors } = this.state
         return (
             <div>
-                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit(onsubmit)}>
-                    <label>Email:
-                        <input name="Email" type="text" placeholder="you@example.com" autoComplete="on" pattern="[A-Za-z]{3}" ref={register} />
+                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} noValidate >
+                    <label htmlFor='email'>Email:
+                    <input name="email" type="email" onChange={this.handleChange} value={this.state.email} formNoValidate placeholder="you@example.com" autoComplete="on" /* pattern="[A-Za-z]{3}" */ />
+                        {errors.email.length > 0 &&
+                            <span style={{ color: 'red' }}>{errors.email}</span>}
                     </label>
-                    <label>Mobile:
-                        <input name="PhoneNumber" type="numeric" placeholder="+46 mobilnummer" autoComplete="on" id="numbers" pattern="[0-9.]+" />
+                    <label htmlFor="mobilePhone">Mobile:
+                    <input name="mobilePhone" type="mobilePhone" onChange={this.handleChange} formNoValidate placeholder="+46 mobilnummer" autoComplete="on" /* pattern="[0-9.]+" */ />
+                        {errors.mobilePhone > 0 &&
+                            <span style={{ color: 'red' }}>{errors.mobilePhone}</span>}
                     </label>
-                    <Button type="submit" value="submit" style={buttonStyle}><a href="https://www.paypal.com/se/signin">Submit</a></Button>
+                    <Button type="submit" value="submit"  formNoValidate style={buttonStyle}>Submit</Button>
                 </form>
-                <img style={{ maxWidth: '50%' }}
-                    src={require("./paypal.png")} alt="Paypal" />
+                <a href="https://www.paypal.com/se/signin"><img style={{ maxWidth: '50%' }}
+                    src={require("./paypal.png")} alt="Paypal" /></a>
             </div>
         )
     }
