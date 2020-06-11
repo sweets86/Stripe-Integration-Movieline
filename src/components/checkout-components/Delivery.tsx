@@ -1,20 +1,53 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { Radio } from "@blueprintjs/core"
+import { RadioGroup, Radio } from "@blueprintjs/core"
 
 
+interface Props {
+
+}
+
+interface State {
+    selectedOption: string
+}
+export default class deliveryMethod extends React.Component<Props, State> {
+
+    constructor(props: Props) {
+        super(props)
+        this.state = {
+            selectedOption: ""
+        }
+    }
 
 
-export default function deliveryMethod() {
+    handleOptionChange = (event: React.FormEvent<HTMLInputElement>) => {
+        this.setState({
+            selectedOption: event.currentTarget.value
+        })
 
-    return (
-        <div>
+    }
 
-            <Radio label="PostNord" value="one" defaultChecked={true} />
-            <Radio label="DHL" value="two" />
-            <Radio label="Express" value="three" />
-            what is this
+    handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
-        </div>
-    );
+        console.log('You have selected:', this.state.selectedOption);
+    }
+
+
+    render() {
+        return (
+            <div>
+                <RadioGroup
+                    label="Delivery Choice"
+                    onChange={this.handleOptionChange}
+                    selectedValue={this.state.selectedOption}
+                >
+                    <Radio {...this.state} label="PostNord" defaultChecked={true} value="one" onChange={this.handleOptionChange} />
+                    <Radio {...this.state} label="DHL" value="two" onChange={this.handleOptionChange} />
+                    <Radio {...this.state} label="Express" value="three" onChange={this.handleOptionChange} />
+                </RadioGroup>
+
+                booooooo
+            </div>
+        );
+    }
 }
