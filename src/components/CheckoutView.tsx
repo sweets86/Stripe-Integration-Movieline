@@ -69,6 +69,8 @@ export default class CheckoutView extends React.Component<Props> {
 
                 <div style={cardStyle}>
                 <h2>Your Info</h2>
+                    <div style={{fontSize: '12px'}}>Fields with * must be filled.</div>
+                    <br/>
                   <InfoForm></InfoForm>
                 </div>
 
