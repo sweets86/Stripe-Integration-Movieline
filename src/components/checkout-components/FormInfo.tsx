@@ -29,30 +29,59 @@ const success = () => {
 export default function InfoForm() {
   const { register, setValue, handleSubmit, errors } = useForm<FormData>();
   const onSubmit = handleSubmit((values) => {
-    console.log('SUBMIT:', values)
+    console.log('SUBMIT:', values);
   });
+  const printinfo = () => {
 
-  console.log({ errors })
+  }
 
+  const errMsg = <div style={{color: 'red', marginBottom: '10px'}}>* Please, fill in the form correctly.</div>
+  const errPhone = <div style={{color: 'red', marginBottom: '10px'}}>* You exceeded the max number of permitted characters</div>
+  
   return (
+    
     <form id="infos-form" onSubmit={onSubmit} autoComplete="on">
-      <Label className="bp3-fill">First Name:</Label>
-      <input className="bp3-fill" name="firstName" ref={register({
+      <Label className="bp3-fill">* Name:</Label>
+      <input style={inputStyle} className="bp3-fill" name="firstName" ref={register({
         required: true,
         pattern: {
           value: /[a-z]\w+/,
           message: "Please enter a valid name"
         }
       }) as any} /> <br />
-      {errors.firstName?.message}
+      {errors.firstName && errMsg }
 
-      <Label className="bp3-fill">Last Name:</Label>
-      <InputGroup className="bp3-fill" name="lastName" ref={register} /> <br />
+      <Label className="bp3-fill">* Email:</Label>
+
+      <input style={inputStyle} className="bp3-fill" name="lastName" ref={register({
+        required: true,
+        pattern: {
+          value: /[a-z]\w+/,
+          message: "Please enter a valid name"
+        }
+      }) as any} /> <br />
+      {errors.lastName && errMsg }
+
       <Label className="bp3-fill">Phone number:</Label>
-      <InputGroup className="bp3-fill" name="phone" ref={register} /> <br />
-      <Label className="bp3-fill">Address:</Label>
-      <InputGroup className="bp3-fill" name="address" ref={register} /> <br />
-      <Button type="submit" style={buttonStyle}>
+
+      <input style={inputStyle} className="bp3-fill" name="phone" type="number"
+      ref={register({
+        required: false
+      }) as any} /> <br />
+      
+
+      <Label className="bp3-fill">* Address:</Label>
+
+            <input style={inputStyle} className="bp3-fill" name="adress" ref={register({
+        required: true,
+        pattern: {
+          value: /[a-z]\w+/,
+          message: "Please enter a valid name"
+        }
+      }) as any} /> <br />
+      {errors.adress && errMsg }
+
+      <Button onClick={onSubmit} type="submit" style={buttonStyle}>
         Save
       </Button>
     </form>
@@ -64,6 +93,12 @@ export default function InfoForm() {
 const buttonStyle: React.CSSProperties = {
   width: '100%',
   border: '1px, grey'
+};
 
-
+const inputStyle: React.CSSProperties = {
+    border: '1px #ccc5b9 solid',
+    position: 'relative',
+    width: '100%',
+    height: '30%',
+    marginBottom: '10px'
 }
