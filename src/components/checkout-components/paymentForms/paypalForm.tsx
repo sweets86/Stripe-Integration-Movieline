@@ -11,20 +11,23 @@ export default class PaypalForm extends React.Component<Props> {
     constructor(props: Props) {
         super(props)
     }
-
+    
+    handleSubmit = () => {
+        const {handleSubmit, register, errors} = useForm()
+        const onSubmit = values => console.log(values)
+    }
     render() {
         return (
             <div>
-                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} autoComplete="on">
-                    <label>Email
-                        <input name="Email" type="text" placeholder="you@example.com" autoComplete="on" pattern='text' />
+                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit(onsubmit)}>
+                    <label>Email:
+                        <input name="Email" type="text" placeholder="you@example.com" autoComplete="on" pattern="[A-Za-z]{3}" ref={register} />
                     </label>
-                    <label>Mobile
-                        <input name="PhoneNumber" type="text" placeholder="+46 mobilnummer" autoComplete="on" pattern='text' />
+                    <label>Mobile:
+                        <input name="PhoneNumber" type="numeric" placeholder="+46 mobilnummer" autoComplete="on" id="numbers" pattern="[0-9.]+" />
                     </label>
                     <Button type="submit" value="submit" style={buttonStyle}><a href="https://www.paypal.com/se/signin">Submit</a></Button>
                 </form>
-
                 <img style={{ maxWidth: '50%' }}
                     src={require("./paypal.png")} alt="Paypal" />
             </div>

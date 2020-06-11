@@ -15,9 +15,9 @@ export default class PaypalForm extends React.Component<Props> {
     render() {
         return (
             <div>
-                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} autoComplete="on">
-                    <label>Mobile
-                        <input name="PhoneNumber" type="text" placeholder="+46 mobilnummer" autoComplete="on" pattern='text' />
+                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }}>
+                    <label>Mobile:
+                        <input name="PhoneNumber" type="text" placeholder="+46 mobilnummer" autoComplete="on" pattern='text' required={true} />
                     </label>
                     <Button type="submit" value="submit" style={buttonStyle}><a href="">Submit</a></Button>
                 </form>
