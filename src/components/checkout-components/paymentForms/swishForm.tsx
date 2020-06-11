@@ -38,7 +38,7 @@ export default class SwishForm extends React.Component<Props, State> {
 
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
-        const {name, value} = event.target
+        const { name, value } = event.target
         let errors = this.state.errors
 
         errors.mobilePhone = validMobileRegex.test(value) ? '' : 'Number is not valid';
@@ -51,10 +51,15 @@ export default class SwishForm extends React.Component<Props, State> {
 
     handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (validateForm(this.state.errors) && this.state.mobilePhone ) {
+        if (validateForm(this.state.errors) && this.state.mobilePhone) {
             console.log(validateForm(this.state.errors))
             console.info('Valid Form')
             alert('You are valid! Open your BankID application.')
+
+            const printSwishForm = {
+                mobilePhone: this.state.mobilePhone
+            }
+            this.props.form(printSwishForm)
         } else {
             console.error('Invalid Form')
         }
@@ -74,7 +79,7 @@ export default class SwishForm extends React.Component<Props, State> {
                 </form>
 
                 <img style={{ maxWidth: '75%' }}
-                    src={require("./swish.png")} alt="Swish" />
+                    src={require("./assets/swish.png")} alt="Swish" />
             </div>
         )
     }

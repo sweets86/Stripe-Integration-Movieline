@@ -5,15 +5,18 @@ import { Button, Card, Label, MenuItem, Menu, FormGroup, InputGroup, RadioGroup,
 import VisaForm from './paymentForms/visaForm'
 import SwishForm from './paymentForms/swishForm'
 import PaypalForm from './paymentForms/paypalForm'
+import PaymentOrder from './paymentForms/paymentOrder'
 
 interface State {
     isVisaSelected: boolean
     isSwishSelected: boolean
     isPaypalSelected: boolean
-    forms: any
+    forms: []
 }
 
-interface Props { }
+interface Props {
+    form: (form: any) => void
+}
 
 export default class Payment extends React.Component<Props, State> {
     constructor(props: Props) {
@@ -25,7 +28,7 @@ export default class Payment extends React.Component<Props, State> {
             isVisaSelected: false,
             isSwishSelected: false,
             isPaypalSelected: false,
-            forms: ""
+            forms: []
         }
     }
 
@@ -42,7 +45,7 @@ export default class Payment extends React.Component<Props, State> {
     }
 
     form = (form: any) => {
-        let formToFill = this.state.forms
+        let formToFill = this.state.forms as any
         formToFill.push(form)
         this.setState({
             forms: formToFill
@@ -66,6 +69,9 @@ export default class Payment extends React.Component<Props, State> {
                     {this.state.isVisaSelected && <VisaForm form={this.form} />}
                     {this.state.isSwishSelected && <SwishForm form={this.form} />}
                     {this.state.isPaypalSelected && <PaypalForm form={this.form} />}
+                </div>
+                <div>
+                    <PaymentOrder forms={this.state.forms} />
                 </div>
             </div>
         )

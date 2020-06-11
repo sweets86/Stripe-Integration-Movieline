@@ -12,7 +12,9 @@ interface Params {
     checkout: string
 }
 
-interface Props extends RouteComponentProps<Params> { }
+interface Props extends RouteComponentProps<Params> {
+    form: (form: any) => void
+}
 
 // Utcheckningsida
 export default class CheckoutView extends React.Component<Props> {
@@ -87,7 +89,7 @@ export default class CheckoutView extends React.Component<Props> {
                 </div>
 
                 <div style={cardStyle}>
-                    <Payment />
+                    <Payment form={this.props.form}/>
                 </div>
                 <Button>Order confirmation</Button>
             </div>

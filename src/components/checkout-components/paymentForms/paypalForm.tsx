@@ -58,7 +58,7 @@ export default class PaypalForm extends React.Component<Props, State> {
                 break;
             case 'mobilePhone':
                 errors.mobilePhone =
-                validMobileRegex.test(value)
+                    validMobileRegex.test(value)
                         ? ''
                         : 'Number is not valid'
                 break;
@@ -73,10 +73,16 @@ export default class PaypalForm extends React.Component<Props, State> {
 
     handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (validateForm(this.state.errors) && this.state.email != "" && this.state.mobilePhone ) {
+        if (validateForm(this.state.errors) && this.state.email != "" && this.state.mobilePhone) {
             console.log(validateForm(this.state.errors))
             console.info('Valid Form')
             alert('You are valid! Check your mailbox.')
+
+            const printPaypalForm = {
+                email: this.state.email,
+                mobilePhone: this.state.mobilePhone
+            }
+            this.props.form(printPaypalForm)
         } else {
             console.error('Invalid Form')
         }
@@ -99,8 +105,8 @@ export default class PaypalForm extends React.Component<Props, State> {
                     </label>
                     <Button type="submit" value="submit" /* formNoValidate */ style={buttonStyle}>Submit</Button>
                 </form>
-                <a href="https://www.paypal.com/se/signin"><img style={{ maxWidth: '50%' }}
-                    src={require("./paypal.png")} alt="Paypal" /></a>
+                <a href="https://www.paypal.com/se/signin"><img style={{ maxWidth: '30%' }}
+                    src={require("./assets/paypal.png")} alt="Paypal" /></a>
             </div>
         )
     }

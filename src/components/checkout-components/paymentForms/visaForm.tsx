@@ -101,7 +101,16 @@ export default class VisaForm extends React.Component<Props, State> {
         if (validateForm(this.state.errors) && this.state.cardNumber && this.state.month && this.state.year && this.state.cvv) {
             console.log(validateForm(this.state.errors))
             console.info('Valid Form')
-            alert('You are valid! Open your BankID application.')
+            alert('You are valid!')
+            const printVisaForm = {
+                cardNumber: this.state.cardNumber,
+                month: this.state.month,
+                year: this.state.year,
+                cvv: this.state.cvv
+            }
+
+            this.props.form(printVisaForm)
+
         } else {
             console.error('Invalid Form')
         }
@@ -136,7 +145,7 @@ export default class VisaForm extends React.Component<Props, State> {
                 </form>
 
                 <img style={{ maxWidth: '75%' }}
-                    src={require("./visa.png")} alt="Visa" />
+                    src={require("./assets/visa.png")} alt="Visa" />
             </div>
         )
     }
