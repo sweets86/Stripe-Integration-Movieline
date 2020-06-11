@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { Button, Card, Label, MenuItem, Menu, FormGroup, InputGroup, RadioGroup, Radio, Checkbox} from "@blueprintjs/core"
 import { CartConsumer, ContextState } from '../context/cartContext'
 import InfoForm from './checkout-components/FormInfo'
+import { BUTTON } from '@blueprintjs/core/lib/esm/common/classes'
 
 
 interface Params {
@@ -23,9 +24,10 @@ export default class CheckoutView extends React.Component<Props> {
         } */
     }
     
-
+    
     render() {
         return (
+         
             <div style={checkoutStyle} className="pt-card pt-elevation-0">
 
                 <div style={cardStyle}>
@@ -58,11 +60,13 @@ export default class CheckoutView extends React.Component<Props> {
                                 }
                                 <h3 style={{textAlign: 'center', padding: '10px', backgroundColor: '#212121', color: 'white'}}>Total: {totalPrice} SEK</h3>
                             </div>
+                           
                         )
                     }}
         </CartConsumer> 
 
                 </div>
+               
 
 
 
@@ -98,12 +102,21 @@ export default class CheckoutView extends React.Component<Props> {
                 </Menu>
                 <br/>
                 <Button>Order confirmation</Button>
-                </div>       
-                
+                </div>     
+                <div id="contain-all" style={{textAlign: 'right', minWidth: '100%', padding: '2%'}}>
+                    <b>Total price including sales tax and shipping: </b>
+                    <div id="price-inkl">HERE THE PRICE + DELIVERY</div>
+                    <Button onClick={confirmOrder}>Confirm your order</Button>
+                </div>
             </div>
         )
     }
 };
+
+function confirmOrder() {
+    if(window.confirm('Are you sure you are done?')){
+    window.location.reload(true);}
+  }
 
 const checkoutStyle: React.CSSProperties = {
     display: "flex",
