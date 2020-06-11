@@ -43,7 +43,9 @@ export default class PaypalForm extends React.Component<Props, State> {
     render() {
         return (
             <div>
-                <h1>VisaForm</h1>
+                <h3>Visa MasterCard</h3>
+                <img style={{ maxWidth: '75%' }}
+                    src={require("./visa.png")} alt="Paypal" />
             </div>
         )
     }

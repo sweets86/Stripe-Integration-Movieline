@@ -12,10 +12,6 @@ export default class PaypalForm extends React.Component<Props> {
         super(props)
     }
 
-    emailFiller(input: any) {
-        var reg = new RegExp(input.split('').join('\\w'))
-    }
-
     render() {
         return (
             <div>
@@ -24,12 +20,12 @@ export default class PaypalForm extends React.Component<Props> {
                         <input name="Email" type="text" placeholder="you@example.com" autoComplete="on" pattern='text' />
                     </label>
                     <label>Mobile
-                        <input name="PhoneNumber" type="text" placeholder="mobilnummer" autoComplete="on" pattern='text' />
+                        <input name="PhoneNumber" type="text" placeholder="+46 mobilnummer" autoComplete="on" pattern='text' />
                     </label>
                     <Button type="submit" value="submit" style={buttonStyle}><a href="https://www.paypal.com/se/signin">Submit</a></Button>
                 </form>
-                
-                <img style={{ maxWidth: '25%' }}
+
+                <img style={{ maxWidth: '50%' }}
                     src={require("./paypal.png")} alt="Paypal" />
             </div>
         )
@@ -40,3 +36,19 @@ const buttonStyle: React.CSSProperties = {
     width: '100%',
     border: '1px, grey'
 }
+
+
+/* matchEmail(input: any) {
+    var reg = new RegExp(/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/
+    );
+    return email.filter(function (email) {
+        if (email.match(reg)) {
+        return email
+        } else {
+            return alert("wrong")
+        }
+    })
+}
+
+onKeyDown={this.matchEmail}
+let email = ['@gmail.com'] */

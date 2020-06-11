@@ -15,8 +15,21 @@ export default class PaypalForm extends React.Component<Props> {
     render() {
         return (
             <div>
-                <h1>SwishForm</h1>
+                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} autoComplete="on">
+                    <label>Mobile
+                        <input name="PhoneNumber" type="text" placeholder="+46 mobilnummer" autoComplete="on" pattern='text' />
+                    </label>
+                    <Button type="submit" value="submit" style={buttonStyle}><a href="">Submit</a></Button>
+                </form>
+
+                <img style={{ maxWidth: '75%'}}
+                    src={require("./swish.png")} alt="Paypal" />
             </div>
         )
     }
+}
+
+const buttonStyle: React.CSSProperties = {
+    width: '100%',
+    border: '1px, grey'
 }
