@@ -1,44 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Titel: Movieline
 
-In the project directory, you can run:
+/*..................................... */
 
-### `yarn start`
+Grupp 7:
+Michelle, Essa, Yanica, Samer
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+/*..................................... */
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Beskrivning 
+             Vi byggde en e-shop som säljer filmer, inspirerad av en gammal butik som fanns i Göteborg (Movieline).
+             Man kommer in på Startsida där man se alla produkter. För att ha en Detail View trycker man på Titel av en vald produkt.
+             Det är möjligt att lägga till en produkt till kundvagn både från Startsida och DetailView sida.
+             Antal produkter i kundvagnen visas på navbar.
+             Trycker man på cart-icon kommer man till kundvagnssida.
+             Här ser man beställningen.
+             Delete knappen ta bort en singel produkt.
+             Total pris visas i botten.
+             För att komma till CheckOut sida trycker man på CHECKOUT längst ner.
+             I checkoutsida får man en sammanfattning av beställning, uppdelad såhär:
+             - Summary of your order: produkterna som finns i cart, med antalet, pris x antalet och igen, totalpriset av alla produkter.
+             - Your Info: här filler man in formulär. Fälten är obligatoriska, utan "Phone". Alla fält som är obligatoriska har i sig validering.
+               Lämna man fält tom, får man ett felmeddelande.
+               Försöker man skriva siffror i "name" "adress" eller "email" får man ett felmeddelande.
+               Det går bara att skriva siffror i "Phone".
+               Om alla fält fyllas i korrekt, data sparas genom att trycka på Save knapp.
+               Autocomplete sätts på "On".
+             -  Delivery: Man får välja mellan 3 olika alternativ: varje alternativ har ett namn, ett pris och en leveransdatum.
+               Beroende på vilket Fraktsätt man väljer, ändras Totalpris och leveransdatum.
+             -  Payment method:   <COMPLETE HERE>
+             -  Prisarna som visas på Startsida och DetailView är inklusiv moms. Frakt läggas till i checkout sida.
+             -  Totalpris inkl. moms och frakt visas på checkout sida.
+             -  När man bekräftar sitt order tömmas alla sparade informationer.
 
-### `yarn test`
+/*..................................... */
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Installerade webpack och designsystem
+             Vi har använt oss av Blueprint som designsystem. --> https://blueprintjs.com/docs/#blueprint
+             Till validering av formulär har vi använt oss av react-hook-form som dependencie.  terminal kommando: < npm install react-hook-form >
+                                                                                                documents: https://react-hook-form.com/get-started#Quickstart 
+             Till routing har vi använt oss av react-router-dom.   terminal kommando: < npm install --save react-router-dom >
+                                                                   documents: https://www.npmjs.com/package/react-router-dom
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
