@@ -59,6 +59,7 @@ export default class SwishForm extends React.Component<Props, State> {
             console.error('Invalid Form')
         }
     }
+    
     render() {
         const { errors } = this.state
         return (
@@ -73,7 +74,7 @@ export default class SwishForm extends React.Component<Props, State> {
                 </form>
 
                 <img style={{ maxWidth: '75%' }}
-                    src={require("./swish.png")} alt="Paypal" />
+                    src={require("./swish.png")} alt="Swish" />
             </div>
         )
     }
