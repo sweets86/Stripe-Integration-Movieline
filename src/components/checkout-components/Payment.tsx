@@ -19,9 +19,6 @@ interface Props {
 export default class Payment extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
-/*         this.visaHandleClick = this.visaHandleClick.bind(this)
-        this.swishHandleClick = this.swishHandleClick.bind(this)
-        this.paypalHandleClick = this.paypalHandleClick.bind(this) */
         this.state = {
             isVisaSelected: false,
             isSwishSelected: false,
@@ -56,7 +53,7 @@ export default class Payment extends React.Component<Props, State> {
         return (
             <div>
                 <h2>Payment</h2>
-                <Menu>
+                <Menu id="menu">
                     <MenuItem text="chouse your method">
                         <MenuItem text="Visa Card" onClick={this.visaHandleClick} />
                         <MenuItem text="Swish" onClick={this.swishHandleClick} />
