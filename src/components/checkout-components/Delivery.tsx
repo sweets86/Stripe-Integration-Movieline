@@ -1,53 +1,58 @@
 import React from "react";
 import { RadioGroup, Radio } from "@blueprintjs/core"
 
+export interface Delivery {
+  name: string
+  price: number
+  days: number
+}
+
+export const deliveryAlternatives: Delivery[] = [{
+  name: "PostNord",
+  price: 49,
+  days: 3
+}, {
+  name: "DHL",
+  price: 149,
+  days: 1
+}, {
+  name: "Express",
+  price: 499,
+  days: 0
+}]
+
+
 
 interface Props {
-
+  selectedDelivery: Delivery
+  setSelectedDelivey: (delivery: Delivery) => void
 }
 
-interface State {
-    selectedOption: string
-}
-export default class deliveryMethod extends React.Component<Props, State> {
+export default class DeliveryMethod extends React.Component<Props> {
 
-    constructor(props: Props) {
-        super(props)
-        this.state = {
-            selectedOption: ""
-        }
-    }
+  render() {
+    const { selectedDelivery, setSelectedDelivey } = this.props
+    return (
+      <div>
+        <>
+          {deliveryAlternatives.map(delivery => {
+            return (
+              <Radio
+                label={delivery.name}
+                value={delivery.name}
+                checked={delivery.name == selectedDelivery.name}
+                onChange={() => setSelectedDelivey(delivery)}>
+                <span>  {delivery.price} kr ({delivery.days} days)</span>
+              </Radio>
+            )
+          })}
+        </>
+        <div>
+          <span>You chose {selectedDelivery.name} as delivery method you will get your package {selectedDelivery.days === 0 ? "today" : "in " + selectedDelivery.days + " days"}</span>
+        </div>
 
+      </div>
 
-    handleOptionChange = (event: React.FormEvent<HTMLInputElement>) => {
-        this.setState({
-            selectedOption: event.currentTarget.value
-        })
-
-    }
-
-    handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        console.log('You have selected:', this.state.selectedOption);
-    }
-
-
-    render() {
-        return (
-            <div>
-                <RadioGroup
-                    label="Delivery Choice"
-                    onChange={this.handleOptionChange}
-                    selectedValue={this.state.selectedOption}
-                >
-                    <Radio {...this.state} label="PostNord" defaultChecked={true} value="one" onChange={this.handleOptionChange} />
-                    <Radio {...this.state} label="DHL" value="two" onChange={this.handleOptionChange} />
-                    <Radio {...this.state} label="Express" value="three" onChange={this.handleOptionChange} />
-                </RadioGroup>
-
-                booooooo
-            </div>
-        );
-    }
+    );
+  }
 }

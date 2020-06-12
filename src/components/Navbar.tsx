@@ -31,6 +31,7 @@ export default function viewNavBar() {
     )
 };
 
+
 const styleNavBar: CSSProperties = {
     backgroundColor: "#212121",
     height: "63PX",

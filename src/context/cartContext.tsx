@@ -14,6 +14,7 @@ export interface ContextState extends ProviderState {
     addProductToCart: (product: Product) => void
     deletefromcart: (product: Product, index: number) => void
     countProductsInCart: () => void
+    getTotalPrice: () => number
 }
 
 export const CartContext = createContext<ContextState>({
@@ -28,7 +29,8 @@ export const CartContext = createContext<ContextState>({
     },
     countProductsInCart: () => {
         console.log("An error occured while trying to count the number of the products, check your log")
-    }
+    },
+    getTotalPrice: () => 0
 })
 
 export const CartConsumer = CartContext.Consumer
@@ -49,7 +51,7 @@ export class CartProvider extends Component<{}, ProviderState> {
             return product.id === produktToFind.product.id
         })
         if (foundProductIndex === -1) { clonedCart.push({ product: product, quantity: 1 }) }
-        else { //incermintproduct()
+        else {
             clonedCart[foundProductIndex].quantity++
 
         }
@@ -84,13 +86,23 @@ export class CartProvider extends Component<{}, ProviderState> {
         return totalQuantityToShow
     }
 
+    getTotalPrice = () => {
+
+        let totalPrice: number = 0
+        this.state.cartItems.map((product) => {
+            totalPrice = totalPrice + product.product.price * product.quantity
+        })
+        return totalPrice
+    }
+
     render() {
         return (
             <CartContext.Provider value={{
                 ...this.state,
                 addProductToCart: this.addProductToCart,
                 deletefromcart: this.deletefromcart,
-                countProductsInCart: this.countProductsInCart
+                countProductsInCart: this.countProductsInCart,
+                getTotalPrice: this.getTotalPrice
             }}>
                 {this.props.children}
             </CartContext.Provider>
