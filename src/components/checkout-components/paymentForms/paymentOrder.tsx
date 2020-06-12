@@ -1,9 +1,7 @@
 import React from 'react'
 import PaymentItem from './paymentItem'
 
-interface State {
-
-}
+interface State { }
 
 interface Props {
     forms: any

@@ -1,7 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { useForm } from "react-hook-form";
-import { Alert, FormGroup, Label, InputGroup, Button } from "@blueprintjs/core";
+import { Button } from "@blueprintjs/core";
 
 const validcardNumberRegex = RegExp(
     /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$/
@@ -99,7 +97,6 @@ export default class VisaForm extends React.Component<Props, State> {
     handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (validateForm(this.state.errors) && this.state.cardNumber && this.state.month && this.state.year && this.state.cvv) {
-            console.log(validateForm(this.state.errors))
             console.info('Valid Form')
             alert('You are valid!')
             const printVisaForm = {
@@ -120,28 +117,28 @@ export default class VisaForm extends React.Component<Props, State> {
         const { errors } = this.state
         return (
             <div>
-                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} /* noValidate */>
+                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} >
                     <label htmlFor="cardNumber">cardNumber:
-                        <input name="cardNumber" type="cardNumber" onChange={this.handleChange} /* formNoValidate */ placeholder=" your cardnumber" autoComplete="on" />
+                        <input name="cardNumber" type="cardNumber" onChange={this.handleChange} placeholder=" your cardnumber" autoComplete="on" />
                         {errors.cardNumber.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.cardNumber}</span>}
                     </label>
                     <label htmlFor="month">Month:
-                        <input name="month" type="text" onChange={this.handleChange} /* formNoValidate */ placeholder="01" autoComplete="on" />
+                        <input name="month" type="text" onChange={this.handleChange} placeholder="01" autoComplete="on" />
                         {errors.month.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.month}</span>}
                     </label>
                     <label htmlFor="year">Year:
-                        <input name="year" type="year" onChange={this.handleChange} /* formNoValidate */ placeholder="20" autoComplete="on" />
+                        <input name="year" type="year" onChange={this.handleChange} placeholder="20" autoComplete="on" />
                         {errors.year.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.year}</span>}
                     </label>
                     <label htmlFor="cvv">CVV:
-                        <input name="cvv" type="cvv" onChange={this.handleChange} /* formNoValidate */ placeholder="cvv" autoComplete="on" />
+                        <input name="cvv" type="cvv" onChange={this.handleChange} placeholder="cvv" autoComplete="on" />
                         {errors.cvv.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.cvv}</span>}
                     </label>
-                    <Button type="submit" value="submit" /* formNoValidate */ style={buttonStyle}>Submit</Button>
+                    <Button type="submit" value="submit" style={buttonStyle}>Submit</Button>
                 </form>
 
                 <img style={{ maxWidth: '75%' }}
@@ -155,14 +152,3 @@ const buttonStyle: React.CSSProperties = {
     width: '100%',
     border: '1px, grey'
 }
-
-/* visaHandleClick = () => {
-    const printVisaForm = {
-        cardNumber: this.state.cardNumber,
-        month: this.state.month,
-        year: this.state.year,
-        cvv: this.state.cvv
-    }
-
-    this.props.form(printVisaForm)
-} */

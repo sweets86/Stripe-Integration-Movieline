@@ -1,8 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { useForm } from "react-hook-form";
-import { Alert, FormGroup, Label, InputGroup, Button } from "@blueprintjs/core";
-import { stringify } from 'querystring';
+import { Button } from "@blueprintjs/core";
 
 const validMobileRegex = RegExp(
     /^(\+\d{1,3}[- ]?)?\d{10}$/
@@ -52,7 +49,6 @@ export default class SwishForm extends React.Component<Props, State> {
     handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (validateForm(this.state.errors) && this.state.mobilePhone) {
-            console.log(validateForm(this.state.errors))
             console.info('Valid Form')
             alert('You are valid! Open your BankID application.')
 
@@ -69,13 +65,13 @@ export default class SwishForm extends React.Component<Props, State> {
         const { errors } = this.state
         return (
             <div>
-                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} /* noValidate */>
+                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} >
                     <label htmlFor="mobilePhone">Mobile:
-                        <input name="mobilePhone" type="mobilePhone" onChange={this.handleChange} /* formNoValidate */ placeholder="mobilnummer" autoComplete="on" />
+                        <input name="mobilePhone" type="mobilePhone" onChange={this.handleChange} placeholder="mobilnummer" autoComplete="on" />
                         {errors.mobilePhone.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.mobilePhone}</span>}
                     </label>
-                    <Button type="submit" value="submit" /* formNoValidate */ style={buttonStyle}>Submit</Button>
+                    <Button type="submit" value="submit" style={buttonStyle}>Submit</Button>
                 </form>
 
                 <img style={{ maxWidth: '75%' }}
@@ -89,14 +85,3 @@ const buttonStyle: React.CSSProperties = {
     width: '100%',
     border: '1px, grey'
 }
-
-/* event.preventDefault();
-        const value: any = event.target;
-        let errors = this.state.errors
-
-        errors.mobilePhone = validMobileRegex.test(value)
-
-        this.setState((prevState) => ({
-            ...prevState,
-            errors, value
-        })) */

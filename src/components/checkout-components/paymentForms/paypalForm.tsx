@@ -1,8 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { useForm } from "react-hook-form";
-import { Alert, FormGroup, Label, InputGroup, Button } from "@blueprintjs/core";
-import { isNumber } from 'util';
+import { Button } from "@blueprintjs/core";
 
 const validEmailRegex = RegExp(
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
@@ -74,7 +71,6 @@ export default class PaypalForm extends React.Component<Props, State> {
     handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (validateForm(this.state.errors) && this.state.email != "" && this.state.mobilePhone) {
-            console.log(validateForm(this.state.errors))
             console.info('Valid Form')
             alert('You are valid! Check your mailbox.')
 
@@ -92,20 +88,20 @@ export default class PaypalForm extends React.Component<Props, State> {
         const { errors } = this.state
         return (
             <div>
-                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} /* noValidate */ >
+                <form style={{ display: 'flex', flexDirection: 'column', width: '20%' }} onSubmit={this.handleSubmit} >
                     <label htmlFor='email'>Email:
-                    <input name="email" type="email" onChange={this.handleChange} value={this.state.email} /* formNoValidate */ placeholder="you@example.com" autoComplete="on" />
+                    <input name="email" type="email" onChange={this.handleChange} value={this.state.email} placeholder="you@example.com" autoComplete="on" />
                         {errors.email.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.email}</span>}
                     </label>
                     <label htmlFor="mobilePhone">Mobile:
-                    <input name="mobilePhone" type="mobilePhone" onChange={this.handleChange} /* formNoValidate */ placeholder="mobilnummer" autoComplete="on" />
+                    <input name="mobilePhone" type="mobilePhone" onChange={this.handleChange} placeholder="mobilnummer" autoComplete="on" />
                         {errors.mobilePhone.length > 0 &&
                             <span style={{ color: 'red' }}>{errors.mobilePhone}</span>}
                     </label>
-                    <Button type="submit" value="submit" /* formNoValidate */ style={buttonStyle}>Submit</Button>
+                    <Button type="submit" value="submit" style={buttonStyle}>Submit</Button>
                 </form>
-                <a href="https://www.paypal.com/se/signin"><img style={{ maxWidth: '30%' }}
+                <a href="https://www.paypal.com/se/signin"><img style={{ maxWidth: '50%' }}
                     src={require("./assets/paypal.png")} alt="Paypal" /></a>
             </div>
         )
@@ -116,19 +112,3 @@ const buttonStyle: React.CSSProperties = {
     width: '100%',
     border: '1px, grey'
 }
-
-
-/* matchEmail(input: any) {
-    var reg = new RegExp(/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/
-    );
-    return email.filter(function (email) {
-        if (email.match(reg)) {
-        return email
-        } else {
-            return alert("wrong")
-        }
-    })
-}
-
-onKeyDown={this.matchEmail}
-let email = ['@gmail.com'] */

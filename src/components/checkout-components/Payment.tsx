@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
-import { useForm } from "react-hook-form";
-import { Button, Card, Label, MenuItem, Menu, FormGroup, InputGroup, RadioGroup, Radio, Checkbox } from "@blueprintjs/core"
+import { MenuItem, Menu } from "@blueprintjs/core"
 import VisaForm from './paymentForms/visaForm'
 import SwishForm from './paymentForms/swishForm'
 import PaypalForm from './paymentForms/paypalForm'
@@ -21,9 +19,9 @@ interface Props {
 export default class Payment extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
-        this.visaHandleClick = this.visaHandleClick.bind(this)
+/*         this.visaHandleClick = this.visaHandleClick.bind(this)
         this.swishHandleClick = this.swishHandleClick.bind(this)
-        this.paypalHandleClick = this.paypalHandleClick.bind(this)
+        this.paypalHandleClick = this.paypalHandleClick.bind(this) */
         this.state = {
             isVisaSelected: false,
             isSwishSelected: false,
