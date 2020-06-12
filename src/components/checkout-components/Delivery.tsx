@@ -33,8 +33,12 @@ export default class DeliveryMethod extends React.Component<Props> {
   render() {
     const { selectedDelivery, setSelectedDelivey } = this.props
     let date = new Date()
-    let todaysDate = date.getDate();
-    let month = date.getMonth() + 1
+    function addDaystoDate(daystoadd: number) {
+      let date = new Date()
+      date.setDate(date.getDate() + daystoadd)
+      return date
+    }
+
     return (
       <div>
         <>
@@ -52,7 +56,9 @@ export default class DeliveryMethod extends React.Component<Props> {
         </>
         <div>
           <span>You chose {selectedDelivery.name} as delivery method you will get your package
-            {selectedDelivery.days === 0 ? " today " + todaysDate + "/" + month : " " + [todaysDate + selectedDelivery.days] + "/" + month} </span>
+            {selectedDelivery.days === 0 ? " today " + addDaystoDate(0).getDate() + "/" + [addDaystoDate(0).getMonth() + 1] :
+              " " + addDaystoDate(selectedDelivery.days).getDate() +
+              "/" + [addDaystoDate(selectedDelivery.days).getMonth() + 1]} </span>
         </div>
 
       </div>
