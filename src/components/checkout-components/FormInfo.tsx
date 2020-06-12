@@ -26,7 +26,7 @@ type FormData = {
 
 
   const success = handleSubmit((values) => {
-    const form = document.getElementById('infos')
+    const form = document.getElementById('msg')
     const name = values.firstName
     const email = values.email
     const phone = values.phone

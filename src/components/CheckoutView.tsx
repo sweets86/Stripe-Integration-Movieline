@@ -36,7 +36,7 @@ export default class CheckoutView extends React.Component<Props, State> {
                     let totalPrice = 0;
                     let pricePerItem = 0;
                     return (
-                        <div style={checkoutStyle} className="pt-card pt-elevation-0">
+                        <div style={checkoutStyle} className="pt-card pt-elevation-0" >
                             <div style={cardStyle}>
                                 <h2>Summary of your order:</h2>
                                 <div>
@@ -61,7 +61,7 @@ export default class CheckoutView extends React.Component<Props, State> {
                                 </div>
                             </div>
 
-                            <div style={cardStyle}>
+                            <div style={cardStyle} id="msg">
                                 <h2>Your Info</h2>
                                 <div style={{ fontSize: '12px' }}>Fields with * must be filled.</div>
                                 <br />
