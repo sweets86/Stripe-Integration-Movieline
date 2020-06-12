@@ -4,6 +4,7 @@ import { Button, Card, Label, MenuItem, Menu, FormGroup, InputGroup, RadioGroup,
 import { CartConsumer, ContextState } from '../context/cartContext'
 import InfoForm from './checkout-components/FormInfo'
 import DeliveryMethod, { Delivery, deliveryAlternatives } from '../components/checkout-components/Delivery'
+import Payment from './checkout-components/Payment'
 
 
 interface Params {
@@ -14,7 +15,9 @@ interface State {
     selectedDelivery: Delivery
 }
 
-interface Props extends RouteComponentProps<Params> { }
+interface Props extends RouteComponentProps<Params> {
+    form: (form: any) => void
+ }
 
 export default class CheckoutView extends React.Component<Props, State> {
 
@@ -74,15 +77,7 @@ export default class CheckoutView extends React.Component<Props, State> {
                             </div>
 
                             <div style={cardStyle}>
-                                <h2>Payment</h2>
-
-                                <Menu>
-                                    <MenuItem text="chouse your method">
-                                        <MenuItem text="Visa Card" />
-                                        <MenuItem text="Swish" />
-                                        <MenuItem text="PayPal" />
-                                    </MenuItem>
-                                </Menu>
+                            <Payment form={this.props.form} />
                                 <br />
                                 <Button>Order confirmation</Button>
                             </div>
