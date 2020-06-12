@@ -28,7 +28,7 @@ Beskrivning
                Autocomplete sätts på "On".
              -  Delivery: Man får välja mellan 3 olika alternativ: varje alternativ har ett namn, ett pris och en leveransdatum.
                Beroende på vilket Fraktsätt man väljer, ändras Totalpris och leveransdatum.
-             -  Payment method:   <COMPLETE HERE>
+             -  Payment method:   Det går att välja bland tre olika betalningsätt: Visa, Swish och Paypal. När man har väl valt ett så kan man fylla i formulär, som kommer också med validering.
              -  Prisarna som visas på Startsida och DetailView är inklusiv moms. Frakt läggas till i checkout sida.
              -  Totalpris inkl. moms och frakt visas på checkout sida.
              -  När man bekräftar sitt order tömmas alla sparade informationer.
