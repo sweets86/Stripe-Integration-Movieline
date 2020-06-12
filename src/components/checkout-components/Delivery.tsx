@@ -48,7 +48,8 @@ export default class DeliveryMethod extends React.Component<Props> {
           })}
         </>
         <div>
-          <span>You chose {selectedDelivery.name} as delivery method you will get your package {selectedDelivery.days === 0 ? "today" : "in " + selectedDelivery.days + " days"}</span>
+          <span>You chose {selectedDelivery.name} as delivery method you will get your package
+          {selectedDelivery.days === 0 ? "today" : "in " + selectedDelivery.days + " days"}</span>
         </div>
 
       </div>
