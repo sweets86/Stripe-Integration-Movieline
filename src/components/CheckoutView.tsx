@@ -79,7 +79,6 @@ export default class CheckoutView extends React.Component<Props, State> {
                             <div style={cardStyle}>
                             <Payment form={this.props.form} />
                                 <br />
-                                <Button>Order confirmation</Button>
                             </div>
                             <div id="contain-all" style={{ textAlign: 'right', minWidth: '100%', padding: '2%' }}>
                                 <b>Total price including sales tax and shipping: {contextData.getTotalPrice() + this.state.selectedDelivery.price} SEK</b>
