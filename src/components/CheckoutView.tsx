@@ -1,55 +1,47 @@
 import React, { useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-// import DetailCheckoutView from './DetailCheckoutView'
 import { Button, Card, Label, MenuItem, Menu, FormGroup, InputGroup, RadioGroup, Radio, Checkbox } from "@blueprintjs/core"
 import { CartConsumer, ContextState } from '../context/cartContext'
 import InfoForm from './checkout-components/FormInfo'
-import { BUTTON } from '@blueprintjs/core/lib/esm/common/classes'
-import Payment from './checkout-components/Payment'
+import DeliveryMethod, { Delivery, deliveryAlternatives } from '../components/checkout-components/Delivery'
 
 
 interface Params {
     checkout: string
 }
 
-interface Props extends RouteComponentProps<Params> {
-    form: (form: any) => void
+interface State {
+    selectedDelivery: Delivery
 }
 
-// Utcheckningsida
-export default class CheckoutView extends React.Component<Props> {
+interface Props extends RouteComponentProps<Params> { }
+
+export default class CheckoutView extends React.Component<Props, State> {
+
+
     constructor(props: Props) {
         super(props)
-
-        const checkout = props.match.params.checkout
-        /* this.state = {
-            setPrice: ""
-        } */
+        this.state = {
+            selectedDelivery: deliveryAlternatives[0]
+        }
     }
-
 
     render() {
         return (
-
-            <div style={checkoutStyle} className="pt-card pt-elevation-0">
-
-                <div style={cardStyle}>
-                    <h2>Summary of your order:</h2>
-                    <CartConsumer>
-                        {(contextData: ContextState) => {
-                            let totalPrice = 0;
-                            let pricePerItem = 0;
-
-                            return (
+            <CartConsumer>
+                {(contextData: ContextState) => {
+                    let totalPrice = 0;
+                    let pricePerItem = 0;
+                    return (
+                        <div style={checkoutStyle} className="pt-card pt-elevation-0">
+                            <div style={cardStyle}>
+                                <h2>Summary of your order:</h2>
                                 <div>
-
                                     {
                                         contextData.cartItems.length ?
-
                                             contextData.cartItems.map((cartItem, index: number) => {
                                                 totalPrice = totalPrice + cartItem.product.price * cartItem.quantity;
                                                 pricePerItem = cartItem.product.price * cartItem.quantity;
-
                                                 return (
                                                     <div style={summary} key={cartItem.product.id}>
                                                         <h3>{cartItem.product.title}</h3>
@@ -61,49 +53,48 @@ export default class CheckoutView extends React.Component<Props> {
                                             :
                                             <p>No items in cart...</p>
                                     }
-                                    <h3 style={{ textAlign: 'center', padding: '10px', backgroundColor: '#212121', color: 'white' }}>Total: {totalPrice} SEK</h3>
+                                    <h3 style={{ textAlign: 'center', padding: '10px', backgroundColor: '#212121', color: 'white' }}>
+                                        Total: {contextData.getTotalPrice()} SEK</h3>
                                 </div>
+                            </div>
 
-                            )
-                        }}
-                    </CartConsumer>
+                            <div style={cardStyle}>
+                                <h2>Your Info</h2>
+                                <div style={{ fontSize: '12px' }}>Fields with * must be filled.</div>
+                                <br />
+                                <InfoForm></InfoForm>
+                            </div>
 
-                </div>
+                            <div style={cardStyle}>
+                                <h2>Delivery</h2>
+                                <DeliveryMethod
+                                    selectedDelivery={this.state.selectedDelivery}
+                                    setSelectedDelivey={(selectedDelivery) => this.setState({ selectedDelivery })}
+                                />
+                            </div>
 
+                            <div style={cardStyle}>
+                                <h2>Payment</h2>
 
-
-
-
-                <div style={cardStyle} id="infos">
-                    <h2>Your Info</h2>
-                    <div style={{ fontSize: '12px' }}>Fields with * must be filled.</div>
-                    <br />
-                    <InfoForm></InfoForm>
-                </div>
-
-                <div style={cardStyle}>
-                    <h2>Delivery</h2>
-
-
-
-                    <Radio label="PostNord" value="one" defaultChecked={true} />
-                    <Radio label="DHL" value="two" />
-                    <Radio label="Express" value="three" />
-
-
-                </div>
-
-                <div style={cardStyle}>
-                    <Payment form={this.props.form} />
-                    <br />
-                    <Button>Order confirmation</Button>
-                </div>
-                <div id="contain-all" style={{ textAlign: 'right', minWidth: '100%', padding: '2%' }}>
-                    <b>Total price including sales tax and shipping: </b>
-                    <div id="price-inkl">HERE THE PRICE + DELIVERY</div>
-                    <Button onClick={confirmOrder}>Confirm your order</Button>
-                </div>
-            </div>
+                                <Menu>
+                                    <MenuItem text="chouse your method">
+                                        <MenuItem text="Visa Card" />
+                                        <MenuItem text="Swish" />
+                                        <MenuItem text="PayPal" />
+                                    </MenuItem>
+                                </Menu>
+                                <br />
+                                <Button>Order confirmation</Button>
+                            </div>
+                            <div id="contain-all" style={{ textAlign: 'right', minWidth: '100%', padding: '2%' }}>
+                                <b>Total price including sales tax and shipping: {contextData.getTotalPrice() + this.state.selectedDelivery.price} SEK</b>
+                                <div id="price-inkl"></div>
+                                <Button onClick={confirmOrder}>Confirm your order</Button>
+                            </div>
+                        </div>
+                    )
+                }}
+            </CartConsumer>
         )
     }
 };
@@ -134,5 +125,4 @@ export const cardStyle: React.CSSProperties = {
 
 const summary: React.CSSProperties = {
     textAlign: 'center'
-
 }
