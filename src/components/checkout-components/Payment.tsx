@@ -4,6 +4,7 @@ import VisaForm from './paymentForms/visaForm'
 import SwishForm from './paymentForms/swishForm'
 import PaypalForm from './paymentForms/paypalForm'
 import PaymentOrder from './paymentForms/paymentOrder'
+import { Switch } from 'react-router-dom';
 
 interface State {
     isVisaSelected: boolean
@@ -54,7 +55,9 @@ export default class Payment extends React.Component<Props, State> {
             <div>
                 <h2>Payment</h2>
                 <Menu id="menu">
-                    <MenuItem text="chouse your method">
+                    <h4>Choose your payment method</h4>
+                    <MenuItem text="Show alternatives..." shouldDismissPopover={true}>
+                            
                         <MenuItem text="Visa Card" onClick={this.visaHandleClick} />
                         <MenuItem text="Swish" onClick={this.swishHandleClick} />
                         <MenuItem text="PayPal" onClick={this.paypalHandleClick} />
