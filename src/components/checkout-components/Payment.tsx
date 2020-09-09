@@ -4,6 +4,7 @@ import VisaForm from './paymentForms/visaForm'
 import SwishForm from './paymentForms/swishForm'
 import PaypalForm from './paymentForms/paypalForm'
 import PaymentOrder from './paymentForms/paymentOrder'
+import { StripeProvider, Elements } from 'react-stripe-elements';
 
 interface State {
     isVisaSelected: boolean
@@ -75,7 +76,12 @@ export default class Payment extends React.Component<Props, State> {
                         : null
                 }
                 <div>
-                    {this.state.isVisaSelected && <VisaForm form={this.form} showSwishForm={this.props.showSwishForm} showPaypalForm={this.props.showPaypalForm} showInfo={this.props.showInfo} />}
+                    {this.state.isVisaSelected &&
+                        <StripeProvider apiKey='pk_test_8asbHZHZoVp2kblhfCEUUGIr006fit3Srr'>
+                            <Elements>
+                                <VisaForm form={this.form} showSwishForm={this.props.showSwishForm} showPaypalForm={this.props.showPaypalForm} showInfo={this.props.showInfo} />
+                            </Elements>
+                        </StripeProvider>}
                     {this.state.isSwishSelected && <SwishForm form={this.form} showVisaForm={this.props.showVisaForm} showPaypalForm={this.props.showPaypalForm} showInfo={this.props.showInfo} />}
                     {this.state.isPaypalSelected && <PaypalForm form={this.form} showVisaForm={this.props.showVisaForm} showSwishForm={this.props.showSwishForm} showInfo={this.props.showInfo} />}
                 </div>

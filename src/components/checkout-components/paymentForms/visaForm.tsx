@@ -1,6 +1,8 @@
 import React from 'react'
 import { Button } from "@blueprintjs/core";
 import Order from '../Order'
+import { ReactStripeElements } from 'react-stripe-elements'
+
 
 const validcardNumberRegex = RegExp(
     /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$/
@@ -46,6 +48,7 @@ interface Props {
 }
 
 export default class VisaForm extends React.Component<Props, State> {
+
     constructor(props: Props) {
         super(props)
 
@@ -106,7 +109,7 @@ export default class VisaForm extends React.Component<Props, State> {
         }))
     }
 
-    handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
+    handleSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (validateForm(this.state.errors) && this.state.cardNumber && this.state.month && this.state.year && this.state.cvc && this.props.showInfo) {
 
