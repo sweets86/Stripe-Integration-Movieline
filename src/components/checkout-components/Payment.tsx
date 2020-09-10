@@ -1,10 +1,11 @@
 import React from 'react';
 import { MenuItem, Menu } from "@blueprintjs/core"
 import VisaForm from './paymentForms/visaForm'
+import StripeForm from './paymentForms/stripeForm'
 import SwishForm from './paymentForms/swishForm'
 import PaypalForm from './paymentForms/paypalForm'
 import PaymentOrder from './paymentForms/paymentOrder'
-import { StripeProvider, Elements } from 'react-stripe-elements';
+import { CartConsumer, ContextState } from '../../context/cartContext'
 
 interface State {
     isVisaSelected: boolean
@@ -36,6 +37,7 @@ export default class Payment extends React.Component<Props, State> {
     visaHandleClick = () => {
         this.setState({ isVisaSelected: true, isSwishSelected: false, isPaypalSelected: false })
         this.setState({ showMenu: false })
+        this.visaPayment()
     }
 
     swishHandleClick = () => {
@@ -58,6 +60,72 @@ export default class Payment extends React.Component<Props, State> {
         })
     }
 
+    async proceedToCheckout(body: any) {
+
+        let stripe
+        stripe = Stripe('pk_test_8asbHZHZoVp2kblhfCEUUGIr006fit3Srr')
+
+        try {
+            console.log("Starting...")
+            console.log(stripe)
+            const response = await fetch('/checkout/checkout-session', {
+                headers: { "Content-Type": "application/json" },
+                method: "POST",
+                body: JSON.stringify(body)
+            })
+
+            const confirm = await response.json()
+            console.log(confirm.id)
+            const result = await stripe.redirectToCheckout({ sessionId: confirm.id })
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    visaPayment = () => {
+        this.proceedToCheckout({
+            render() {
+                return (
+                    <CartConsumer>
+                        {(contexData: ContextState) => {
+                            return (
+
+                                contexData.cartItems.length ?
+                                    contexData.cartItems.map((cartItem, index: number) => {
+
+                                        return (
+                                            {
+
+                                                line_items: [
+                                                    {
+                                                        title: "Summary of your order",
+                                                        price_data: {
+                                                            currency: "sek",
+                                                            product_data: {
+                                                                name: cartItem.product.title
+                                                            },
+                                                            unit_amount: cartItem.product.price
+                                                        },
+                                                        quantity: cartItem.quantity
+                                                    },
+                                                ],
+                                                mode: "payment"
+                                            })
+
+                                    })
+
+                                    :
+                                    <h1></h1>
+                            )
+                        }}
+                    </CartConsumer>
+                )
+            },
+        })
+        console.log("heej")
+    }
+
     render() {
         return (
             <div>
@@ -76,12 +144,7 @@ export default class Payment extends React.Component<Props, State> {
                         : null
                 }
                 <div>
-                    {this.state.isVisaSelected &&
-                        <StripeProvider apiKey='pk_test_8asbHZHZoVp2kblhfCEUUGIr006fit3Srr'>
-                            <Elements>
-                                <VisaForm form={this.form} showSwishForm={this.props.showSwishForm} showPaypalForm={this.props.showPaypalForm} showInfo={this.props.showInfo} />
-                            </Elements>
-                        </StripeProvider>}
+                    {this.state.isVisaSelected}
                     {this.state.isSwishSelected && <SwishForm form={this.form} showVisaForm={this.props.showVisaForm} showPaypalForm={this.props.showPaypalForm} showInfo={this.props.showInfo} />}
                     {this.state.isPaypalSelected && <PaypalForm form={this.form} showVisaForm={this.props.showVisaForm} showSwishForm={this.props.showSwishForm} showInfo={this.props.showInfo} />}
                 </div>
@@ -93,3 +156,4 @@ export default class Payment extends React.Component<Props, State> {
     }
 }
 
+{/* <StripeForm form={this.form} showSwishForm={this.props.showSwishForm} showPaypalForm={this.props.showPaypalForm} showInfo={this.props.showInfo} /> */ }
