@@ -16,7 +16,7 @@ export default class StripeForm extends React.Component<Props, State> {
     async proceedToCheckout(body: any) {
 
         let stripe
-        stripe = Stripe('pk_test_8asbHZHZoVp2kblhfCEUUGIr006fit3Srr')
+        /* stripe = Stripe('pk_test_8asbHZHZoVp2kblhfCEUUGIr006fit3Srr') */
 
         try  {
             console.log("Starting...")
@@ -28,7 +28,7 @@ export default class StripeForm extends React.Component<Props, State> {
 
             const confirm = await response.json()
             console.log(confirm.id)
-            const result = await stripe.redirectToCheckout({sessionId: confirm.id})
+            /* const result = await stripe.redirectToCheckout({sessionId: confirm.id}) */
 
         } catch (err) {
             console.log(err)

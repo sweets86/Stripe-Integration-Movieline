@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button } from "@blueprintjs/core";
 import Order from '../Order'
-import { ReactStripeElements } from 'react-stripe-elements'
 
 
 const validcardNumberRegex = RegExp(

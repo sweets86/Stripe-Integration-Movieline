@@ -63,12 +63,12 @@ export default class Payment extends React.Component<Props, State> {
     async proceedToCheckout(body: any) {
 
         let stripe
-        stripe = Stripe('pk_test_8asbHZHZoVp2kblhfCEUUGIr006fit3Srr')
+        /* stripe = Stripe('pk_test_8asbHZHZoVp2kblhfCEUUGIr006fit3Srr') */
 
         try {
             console.log("Starting...")
             console.log(stripe)
-            const response = await fetch('/checkout/checkout-session', {
+            const response = await fetch('/api/checkout-session', {
                 headers: { "Content-Type": "application/json" },
                 method: "POST",
                 body: JSON.stringify(body)
@@ -76,7 +76,7 @@ export default class Payment extends React.Component<Props, State> {
 
             const confirm = await response.json()
             console.log(confirm.id)
-            const result = await stripe.redirectToCheckout({ sessionId: confirm.id })
+            /* const result = await stripe.redirectToCheckout({ sessionId: confirm.id }) */
 
         } catch (err) {
             console.log(err)
@@ -96,7 +96,6 @@ export default class Payment extends React.Component<Props, State> {
 
                                         return (
                                             {
-
                                                 line_items: [
                                                     {
                                                         title: "Summary of your order",
