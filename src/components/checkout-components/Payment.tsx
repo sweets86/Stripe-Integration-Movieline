@@ -6,6 +6,10 @@ import SwishForm from './paymentForms/swishForm'
 import PaypalForm from './paymentForms/paypalForm'
 import PaymentOrder from './paymentForms/paymentOrder'
 import { CartConsumer, ContextState } from '../../context/cartContext'
+import { loadStripe } from '@stripe/stripe-js'
+import Stripe from 'stripe';
+import {useStripe} from '@stripe/react-stripe-js'
+
 
 interface State {
     isVisaSelected: boolean
@@ -62,21 +66,22 @@ export default class Payment extends React.Component<Props, State> {
 
     async proceedToCheckout(body: any) {
 
-        let stripe
-        /* stripe = Stripe('pk_test_8asbHZHZoVp2kblhfCEUUGIr006fit3Srr') */
+        const PUBLIC_KEY = 'pk_test_8asbHZHZoVp2kblhfCEUUGIr006fit3Srr'
+        const stripePromise = loadStripe(PUBLIC_KEY)
 
         try {
             console.log("Starting...")
-            console.log(stripe)
             const response = await fetch('/api/checkout-session', {
                 headers: { "Content-Type": "application/json" },
                 method: "POST",
                 body: JSON.stringify(body)
             })
 
-            const confirm = await response.json()
-            console.log(confirm.id)
-            /* const result = await stripe.redirectToCheckout({ sessionId: confirm.id }) */
+            const session = await response.json()
+            console.log(session.id)
+            const stripe = await stripePromise
+            const result = await stripe?.redirectToCheckout({sessionId: session.id}) 
+            console.log(result)
 
         } catch (err) {
             console.log(err)
@@ -93,6 +98,7 @@ export default class Payment extends React.Component<Props, State> {
 
                                 contexData.cartItems.length ?
                                     contexData.cartItems.map((cartItem, index: number) => {
+                                        console.log("heej")
 
                                         return (
                                             {
@@ -122,7 +128,6 @@ export default class Payment extends React.Component<Props, State> {
                 )
             },
         })
-        console.log("heej")
     }
 
     render() {
