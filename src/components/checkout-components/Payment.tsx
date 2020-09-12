@@ -8,7 +8,8 @@ import PaymentOrder from './paymentForms/paymentOrder'
 import { CartConsumer, ContextState } from '../../context/cartContext'
 import { loadStripe } from '@stripe/stripe-js'
 import Stripe from 'stripe';
-import {useStripe} from '@stripe/react-stripe-js'
+import { useStripe } from '@stripe/react-stripe-js'
+import { createWriteStream } from 'fs';
 
 
 interface State {
@@ -34,14 +35,15 @@ export default class Payment extends React.Component<Props, State> {
             isSwishSelected: false,
             isPaypalSelected: false,
             forms: [],
-            showMenu: true
+            showMenu: true,
         }
     }
 
     visaHandleClick = () => {
         this.setState({ isVisaSelected: true, isSwishSelected: false, isPaypalSelected: false })
         this.setState({ showMenu: false })
-        this.visaPayment()
+        /* this.goToCheckout()
+        this.visaPayment() */
     }
 
     swishHandleClick = () => {
@@ -64,8 +66,7 @@ export default class Payment extends React.Component<Props, State> {
         })
     }
 
-    async proceedToCheckout(body: any) {
-
+/*     async proceedToCheckout(body: any) {
         const PUBLIC_KEY = 'pk_test_8asbHZHZoVp2kblhfCEUUGIr006fit3Srr'
         const stripePromise = loadStripe(PUBLIC_KEY)
 
@@ -80,7 +81,7 @@ export default class Payment extends React.Component<Props, State> {
             const session = await response.json()
             console.log(session.id)
             const stripe = await stripePromise
-            const result = await stripe?.redirectToCheckout({sessionId: session.id}) 
+            const result = await stripe?.redirectToCheckout({ sessionId: session.id })
             console.log(result)
 
         } catch (err) {
@@ -88,47 +89,23 @@ export default class Payment extends React.Component<Props, State> {
         }
     }
 
-    visaPayment = () => {
+    goToCheckout = () => {
         this.proceedToCheckout({
-            render() {
-                return (
-                    <CartConsumer>
-                        {(contexData: ContextState) => {
-                            return (
-
-                                contexData.cartItems.length ?
-                                    contexData.cartItems.map((cartItem, index: number) => {
-                                        console.log("heej")
-
-                                        return (
-                                            {
-                                                line_items: [
-                                                    {
-                                                        title: "Summary of your order",
-                                                        price_data: {
-                                                            currency: "sek",
-                                                            product_data: {
-                                                                name: cartItem.product.title
-                                                            },
-                                                            unit_amount: cartItem.product.price
-                                                        },
-                                                        quantity: cartItem.quantity
-                                                    },
-                                                ],
-                                                mode: "payment"
-                                            })
-
-                                    })
-
-                                    :
-                                    <h1></h1>
-                            )
-                        }}
-                    </CartConsumer>
-                )
-            },
+            line_items: [
+                {
+                    price_data: {
+                        currency: "sek",
+                        product_data: {
+                            name: this.state.title
+                        },
+                        unit_amount: this.state.amount
+                    },
+                    quantity: this.state.quantity
+                },
+            ],
+            mode: "payment"
         })
-    }
+    } */
 
     render() {
         return (
@@ -148,7 +125,7 @@ export default class Payment extends React.Component<Props, State> {
                         : null
                 }
                 <div>
-                    {this.state.isVisaSelected}
+                    {this.state.isVisaSelected && <StripeForm form={this.form} showSwishForm={this.props.showSwishForm} showPaypalForm={this.props.showPaypalForm} showInfo={this.props.showInfo} />}
                     {this.state.isSwishSelected && <SwishForm form={this.form} showVisaForm={this.props.showVisaForm} showPaypalForm={this.props.showPaypalForm} showInfo={this.props.showInfo} />}
                     {this.state.isPaypalSelected && <PaypalForm form={this.form} showVisaForm={this.props.showVisaForm} showSwishForm={this.props.showSwishForm} showInfo={this.props.showInfo} />}
                 </div>
@@ -159,5 +136,3 @@ export default class Payment extends React.Component<Props, State> {
         )
     }
 }
-
-{/* <StripeForm form={this.form} showSwishForm={this.props.showSwishForm} showPaypalForm={this.props.showPaypalForm} showInfo={this.props.showInfo} /> */ }
