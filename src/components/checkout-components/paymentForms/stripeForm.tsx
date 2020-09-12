@@ -10,6 +10,7 @@ interface Props {
 }
 
 interface State {
+    showVisaForm: boolean
     title: string
     amount: number
     quantity: number
@@ -20,6 +21,7 @@ export default class StripeForm extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
         this.state = {
+            showVisaForm: true,
             title: "",
             amount: parseInt(""),
             quantity: parseInt("")
@@ -49,47 +51,67 @@ export default class StripeForm extends React.Component<Props, State> {
         }
     }
 
-    visaPayment = () => {
+    visaPayment = (prodTitle: string, prodPrice: number, prodQuant: number) => {
 
         this.proceedToCheckout({
             line_items: [
                 {
+                    description: prodTitle,
                     price_data: {
                         currency: "sek",
                         product_data: {
-                            name:" this"
+                            name: "Din beställning"
                         },
-                        unit_amount: 200000
+                        unit_amount: prodPrice * 100
                     },
-                    quantity: 2
+                    quantity: prodQuant
                 },
             ],
             mode: "payment"
         })
     }
 
-    handleClick = (prodTitle: string, prodPrice: number, prodQuant: number) => {
-        console.log(prodTitle)
-    }
-
     render() {
+
         return (
             <CartConsumer>
-                {(contexData: ContextState) => {
+                {(contextData: ContextState) => {
                     return (
-                        contexData.cartItems.map((cartItem, index: number) => {
-                            let prodTitle = cartItem.product.title
-                            let prodPrice = cartItem.product.price
-                            let prodQuant = cartItem.quantity
-                            return (
-                                <div>
-                                    <button onClick={(e) => this.handleClick(prodTitle, prodPrice, prodQuant)}>Click</button>
-                                </div>
-                            )
-                        })
+
+                        <div>
+                            {
+                                this.state.showVisaForm ?
+                                    contextData.cartItems.length ?
+                                        contextData.cartItems.map((cartItem, index: number) => {
+
+                                            let prodTitle = cartItem.product.title
+                                            let prodPrice = cartItem.product.price
+                                            let prodQuant = cartItem.quantity
+
+                                            return (
+                                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }} key={cartItem.product.id}>
+                                                    <h5>{cartItem.product.id}# Order</h5>
+                                                    <h4>{prodTitle}</h4>
+                                                    <button style={buttonStyle} onClick={(e) => this.visaPayment(prodTitle, prodPrice, prodQuant)}>Pay</button>
+                                                </div>
+                                            )
+                                        })
+                                        :
+                                        <p>No items in cart...</p>
+                                    : null
+                            }
+                            <img style={{ maxWidth: '75%', display: "flex", justifyContent: "center", margin: "auto" }}
+                                src={require("./assets/visa.png")} alt="Visa" />
+                        </div>
                     )
+
                 }}
             </CartConsumer>
         )
     }
+}
+
+const buttonStyle: React.CSSProperties = {
+    width: '25%',
+    border: '1px, grey'
 }

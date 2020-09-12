@@ -13,7 +13,7 @@ export interface ProviderState {
 export interface ContextState extends ProviderState {
     addProductToCart: (product: Product) => void
     deletefromcart: (product: Product, index: number) => void
-    countProductsInCart: () => void
+    countProductsInCart: () => number
     getTotalPrice: () => number
     getVAT: () => number
 }
@@ -28,9 +28,8 @@ export const CartContext = createContext<ContextState>({
         console.log(("Something went wrong while deleting " + product.title + "to cart")
         )
     },
-    countProductsInCart: () => {
-        console.log("An error occured while trying to count the number of the products, check your log")
-    },
+    countProductsInCart: () => 0,
+
     getTotalPrice: () => 0,
 
     getVAT: () => 0
@@ -105,7 +104,7 @@ export class CartProvider extends Component<{}, ProviderState> {
             productVAT = productVAT + VAT.product.price * 0.2 * VAT.quantity
         })
 
-        return Math.round( productVAT * 100 + Number.EPSILON ) / 100
+        return Math.round(productVAT * 100 + Number.EPSILON) / 100
     }
 
     render() {

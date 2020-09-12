@@ -14,15 +14,15 @@ export default class PaymentOrder extends React.Component<Props, State> {
             return this.props.forms.map((form: any) => {
                 return <PaymentItem key={form} form={form} />
             })
-        } else {
+        } /* else {
             return <h4 style={{ color: "red" }}>No payment option selected.</h4>
-        }
+        } */
     }
 
     render() {
         return (
             <div style={{ textAlign: "center" }}>
-                <h3>Payment confirmation:</h3>
+                {/* <h3>Payment confirmation:</h3> */}
                 {this.orderList}
             </div>
         )
