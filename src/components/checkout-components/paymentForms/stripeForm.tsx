@@ -16,7 +16,6 @@ interface State {
     quantity: number
 }
 
-
 export default class StripeForm extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
@@ -29,26 +28,27 @@ export default class StripeForm extends React.Component<Props, State> {
     }
 
     async proceedToCheckout(body: any) {
-        const PUBLIC_KEY = 'pk_test_8asbHZHZoVp2kblhfCEUUGIr006fit3Srr'
-        const stripePromise = loadStripe(PUBLIC_KEY)
 
-        try {
-            console.log("Starting...")
-            const response = await fetch('/api/checkout-session', {
-                headers: { "Content-Type": "application/json" },
-                method: "POST",
-                body: JSON.stringify(body)
-            })
-
-            const session = await response.json()
-            console.log(session.id)
-            const stripe = await stripePromise
-            const result = await stripe?.redirectToCheckout({ sessionId: session.id })
-            console.log(result)
-
-        } catch (err) {
-            console.log(err)
-        }
+            const PUBLIC_KEY = 'pk_test_8asbHZHZoVp2kblhfCEUUGIr006fit3Srr'
+            const stripePromise = loadStripe(PUBLIC_KEY)
+    
+            try {
+                console.log("Starting...")
+                const response = await fetch('/api/checkout-session', {
+                    headers: { "Content-Type": "application/json" },
+                    method: "POST",
+                    body: JSON.stringify(body)
+                })
+    
+                const session = await response.json()
+                console.log(session.id)
+                const stripe = await stripePromise
+                const result = await stripe?.redirectToCheckout({ sessionId: session.id })
+                console.log(result)
+                
+            } catch (err) {
+                console.log(err)
+            }
     }
 
     visaPayment = (prodTitle: string, prodPrice: number, prodQuant: number) => {
