@@ -11,7 +11,7 @@ interface State {
     showSuccess: boolean
     showOrder: boolean
     orderId: string
-    description: string
+    name: string
     amount: number
     quantity: number
 }
@@ -30,7 +30,7 @@ export default class Confirmation extends React.Component<Props, State> {
             showSuccess: false,
             showOrder: false,
             orderId: "",
-            description: "",
+            name: "",
             amount: parseInt(""),
             quantity: parseInt("")
         }
@@ -52,7 +52,7 @@ export default class Confirmation extends React.Component<Props, State> {
 
                 if (session.isVerified) {
                     this.setState({ showSuccess: true })
-                    this.makeOrderRequest()
+                    this.makeOrderRequest(sessionId)
                 } else {
                     alert('Du måste genomföra betalningen innan din order kan skickas.')
                 }
@@ -63,34 +63,35 @@ export default class Confirmation extends React.Component<Props, State> {
         }
     }
 
-    async makeOrderRequest() {
+    async makeOrderRequest(sessionId: any) {
         try {
-            const response = await fetch('/api', {
+            const response = await fetch('/api/order/' + sessionId, {
                 headers: { "Content-Type": "application/json" },
                 method: "GET",
             })
             console.log(response)
-            const order = await response.json()
-            console.log(order)
-            return order.map((orderItem: any) => {
+            const orders = await response.json()
+            console.log(orders)
+            
+            let id = orders.sessionId
+            this.setState({ orderId: id })
 
-                let orderId = orderItem.payment_intent
-                let amount = orderItem.amount_subtotal / 100
+            let items = orders.items
+            
+            items.map((data: any) => {
 
-                this.setState({ orderId: orderId })
+                let name = data.description
+                let amount = data.price_data.unit_amount / 100
+                let quantity = data.quantity
+
+                this.setState({ name: name })
                 this.setState({ amount: amount })
+                this.setState({ quantity: quantity })
 
-                this.setState({ showOrder: true })
-
-                orderItem.map((name: any) => {
-                    let description = name.description
-                    let quantity = name.quantity
-
-                    this.setState({ description: description })
-                    this.setState({ quantity: quantity })
-                })
             })
 
+            this.setState({ showOrder: true })
+            
         } catch (err) {
             console.log(err)
         }
@@ -112,7 +113,7 @@ export default class Confirmation extends React.Component<Props, State> {
                             <p>
                                 We appreciate your business!
                                 If you have any questions, please email
-            <Link to="mailto:orders@example.com">support@movieline.com</Link>.
+            <Link to="mailto:support@movieline.com"> support@movieline.com</Link>.
           </p>
                             {/* <button onClick={this.orderInfo}>Order</button> */}
                         </div>
@@ -123,7 +124,7 @@ export default class Confirmation extends React.Component<Props, State> {
                         <div>
                             <h2>Din order</h2>
                             <h3>Orderbekräftelse: {this.state.orderId}</h3>
-                            <h3>{this.state.description}</h3>
+                            <h3>{this.state.name}</h3>
                             <h3>Betalt: {this.state.amount} SEK</h3>
                             <h3>Antal {this.state.quantity}</h3>
                         </div>
