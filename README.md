@@ -23,7 +23,7 @@ https://github.com/sweets86/Stripe-Integration-Movieline
 När köpet är bekräftat valideras köpet med sessionID och skapar en json.fil med orderinformation och sessionID.
 
 * Länk till Github-repo Backend
-https://github.com/sweets86/Todo-Express
+https://github.com/sweets86/Backend-Stripe-Movieline
 
 # För att köra applikationen
 Ladda ner filerna från Github och kopiera innehållet i en ny mapp och öppna mappen i VSC. Du behöver ha node.js installerat på datorn. Öppna terminalen och skriv in npm install. Du kommer se att node_modules mappen läggs till.
