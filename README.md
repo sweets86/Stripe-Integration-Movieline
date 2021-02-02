@@ -28,4 +28,5 @@ https://github.com/sweets86/Backend-Stripe-Movieline
 # För att köra applikationen
 Ladda ner filerna från Github och kopiera innehållet i en ny mapp och öppna mappen i VSC. Du behöver ha node.js installerat på datorn. Öppna terminalen och skriv in npm install. Du kommer se att node_modules mappen läggs till.
 Därefter skriver du in npm start i terminalen. Nu bör du fått igång applikationen till port localhost:3000.
-För backend skriver du node app.js i terminalen. Nu bör du fått igång applikationen till port localhost:5000.
+I stripeForm.tsx filen, ersätt och klistra in din PUBLIC_KEY från ditt Stripe konto mellan situationstecken och spara filen.
+För backend skriver du node app.js i terminalen. Nu bör du fått igång applikationen till port localhost:5000. LÄS README.
